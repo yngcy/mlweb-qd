@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  my_postgres:
+    build: ./my_postgres
+    container_name: my_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: scse@postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  auth_srv:
+    container_name: auth_srv
+    image: quay.io/keycloak/keycloak:21.0.2
+    depends_on:
+      - my_postgres
+    restart: unless-stopped
+    ports:
+      - "8083:8080"
+    #     - "8443:8443"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: scse@auth_srv
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://my_postgres:5432/auth_db
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: scse@postgres
+    volumes:
+      - ./auth_srv/realms:/opt/keycloak/data/import
+    command:
+      - start-dev --import-realm

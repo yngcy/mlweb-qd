@@ -1,0 +1,92 @@
+{
+  "realm" : "aerodynamic",
+  "users" : [ {
+    "id" : "f27812d3-6c74-40ad-9efa-b9a71a5ff7f9",
+    "createdTimestamp" : 1681887538563,
+    "username" : "tester1",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "firstName" : "人员",
+    "lastName" : "内部",
+    "attributes" : {
+      "sl" : [ "SEC_RP" ]
+    },
+    "credentials" : [ {
+      "id" : "1c5736cb-47d3-4447-93d7-bcb84e43d4fe",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1681887562694,
+      "secretData" : "{\"value\":\"6hLBI2bHmZBoWz9EbziZ2EKhPPZwD0al8t2r12jC14U=\",\"salt\":\"ZBv1PfP1yUnggd5J9A/MxQ==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "admin" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "eec11a99-64ad-4132-bd19-4f1b7385aa7f",
+    "createdTimestamp" : 1681889920018,
+    "username" : "tester2",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "firstName" : "人员",
+    "lastName" : "一般",
+    "credentials" : [ {
+      "id" : "813c537f-034f-45da-a4c8-ac7012a5c12b",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1681889944101,
+      "secretData" : "{\"value\":\"1ED08IFjLxwXH/1G+80cpQtD6QNfDtgDR8A4wuVqTwE=\",\"salt\":\"Fkx3FN79aKr3YwDVtRM0KA==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ "UPDATE_PASSWORD" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "d462dfda-6b53-45b8-a73c-3ba6b27e2613",
+    "createdTimestamp" : 1681890009626,
+    "username" : "tester3",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "firstName" : "人员",
+    "lastName" : "重要",
+    "attributes" : {
+      "sl" : [ "SEC_IP" ]
+    },
+    "credentials" : [ {
+      "id" : "94033a77-8d4d-4edd-9641-a473a5eb6db3",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1681890047226,
+      "secretData" : "{\"value\":\"uwE0tb/swjxJXj02e+ZgeZNej01CdGUnpPoHfF7034Y=\",\"salt\":\"ZDyG0/j4muruinQEs0oKOw==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ "UPDATE_PASSWORD" ],
+    "realmRoles" : [ "admin" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "1cb631e7-76c6-4b16-9964-06cf6cadb9c5",
+    "createdTimestamp" : 1681890094704,
+    "username" : "tester4",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "firstName" : "人员",
+    "lastName" : "核心",
+    "attributes" : {
+      "sl" : [ "SEC_CP" ]
+    },
+    "credentials" : [ ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}
