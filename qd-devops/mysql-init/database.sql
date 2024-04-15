@@ -1,0 +1,11 @@
+-- 系统管理数据库
+CREATE DATABASE IF NOT EXISTS mlweb_system DEFAULT CHAR SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;
+
+-- OAuth2 数据库
+CREATE DATABASE IF NOT EXISTS auth_db DEFAULT CHAR SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;
+
+-- 系统配置数据库
+CREATE DATABASE IF NOT EXISTS qd_cms DEFAULT CHAR SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;
+
+-- 项目管理数据库
+CREATE DATABASE IF NOT EXISTS qd_pms DEFAULT CHAR SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;
