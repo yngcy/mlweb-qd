@@ -59,15 +59,15 @@
             <artifactId>common-core</artifactId>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>cn.edu.swust.qd</groupId>-->
-        <!--            <artifactId>common-redis</artifactId>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>cn.edu.swust.qd</groupId>
+            <artifactId>common-redis</artifactId>
+        </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>cn.edu.swust.qd</groupId>-->
-        <!--            <artifactId>common-mybatis</artifactId>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>cn.edu.swust.qd</groupId>
+            <artifactId>common-mybatis</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.github.binarywang</groupId>

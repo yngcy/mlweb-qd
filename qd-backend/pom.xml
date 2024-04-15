@@ -16,6 +16,9 @@
         <module>qd-common</module>
         <module>qd-auth</module>
         <module>qd-sysconf</module>
+        <module>qd-system</module>
+        <module>qd-system/system-boot</module>
+        <module>qd-system/system-api</module>
 
     </modules>
 
@@ -275,6 +278,21 @@
             <dependency>
                 <groupId>cn.edu.swust.qd</groupId>
                 <artifactId>common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>common-redis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>common-mybatis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>common-security</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
