@@ -5,7 +5,7 @@ ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 
 # Configure a database vendor
-ENV KC_DB=postgres
+ENV KC_DB=mysql
 
 WORKDIR /opt/keycloak
 # for demonstration purposes only, please make sure to use proper certificates in production instead
@@ -16,9 +16,9 @@ FROM quay.io/keycloak/keycloak:21.0.2
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 # change these values to point to a running postgres instance
-ENV KC_DB=postgres
+ENV KC_DB=mysql
 # ENV KC_DB_URL=jdbc:postgresql://host.docker.internal:5432/keycloak
-ENV KC_DB_URL=jdbc:postgresql://my_postgres:5432/keycloak
+ENV KC_DB_URL=jdbc:mysql://mysql:3307/keycloak
 ENV KC_DB_USERNAME=keycloak
 ENV KC_DB_PASSWORD=keycloak
 ENV KC_HOSTNAME=localhost

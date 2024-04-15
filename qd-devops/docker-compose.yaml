@@ -1,35 +1,43 @@
 version: "3.9"
 services:
-  my_postgres:
-    build: ./my_postgres
-    container_name: my_postgres
+  mysql:
+    build: mysql
+    container_name: mysql
     restart: always
     environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: scse@postgres
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: auth_db
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
     ports:
-      - 5432:5432
+      - 3307:3306
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - ./mysql-data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - qdnetwork
 
   auth_srv:
     container_name: auth_srv
     image: quay.io/keycloak/keycloak:21.0.2
     depends_on:
-      - my_postgres
+      - mysql
     restart: unless-stopped
     ports:
       - "8083:8080"
     #     - "8443:8443"
     environment:
       KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: scse@auth_srv
-      KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://my_postgres:5432/auth_db
-      KC_DB_USERNAME: postgres
-      KC_DB_PASSWORD: scse@postgres
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: mysql
+      KC_DB_URL: jdbc:mysql://mysql:3307/auth_db
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: password
     volumes:
       - ./auth_srv/realms:/opt/keycloak/data/import
     command:
       - start-dev --import-realm
+    networks:
+      - qdnetwork
+networks:
+  qdnetwork:

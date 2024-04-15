@@ -1,6 +1,6 @@
 docker stop auth_srv
-docker stop my_postgres
+docker stop mysql
 docker rm auth_srv
-docker rm my_postgres
-docker image rm qd-my_postgres
-remove-item -Recurse ./postgres-data
+docker rm mysql
+docker image rm qd-mysql
+remove-item -Recurse ./mysql-data
