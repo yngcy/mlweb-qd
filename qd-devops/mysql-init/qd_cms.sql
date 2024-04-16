@@ -1,7 +1,24 @@
 -- 切换库
-USE qd_cm;
+USE qd_cms;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- 创建本地用户表
+CREATE TABLE IF NOT EXISTS local_user
+(
+    id             BIGINT       NOT NULL PRIMARY KEY COMMENT 'id',
+    name           VARCHAR(512) NOT NULL COMMENT '昵称',
+    openid        VARCHAR(256) NOT NULL COMMENT 'openID',
+    create_user_id BIGINT COMMENT '创建用户',
+    create_time    DATETIME COMMENT '创建时间',
+    update_user_id BIGINT COMMENT '更新用户',
+    update_time    DATETIME COMMENT '更新时间',
+    FOREIGN KEY (create_user_id) REFERENCES local_user (id),
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
+) COMMENT '本地用户' ENGINE = InnoDB
+                     CHARACTER SET = utf8mb4
+                     COLLATE = utf8mb4_general_ci
+                     ROW_FORMAT = DYNAMIC;
 
 -- 创建天平类型表
 CREATE TABLE IF NOT EXISTS balance_type
@@ -14,11 +31,10 @@ CREATE TABLE IF NOT EXISTS balance_type
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '天平类型' ENGINE = InnoDB
                      CHARACTER SET = utf8mb4
-                     COLLATE = ut8mb4_general_ci
+                     COLLATE = utf8mb4_general_ci
                      ROW_FORMAT = DYNAMIC;
 
 
@@ -37,11 +53,10 @@ CREATE TABLE IF NOT EXISTS company
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
     FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (father_id) REFERENCES company (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (father_id) REFERENCES company (id)
 ) COMMENT '研究机构' ENGINE = InnoDB
                      CHARACTER SET = utf8mb4
-                     COLLATE = ut8mb4_general_ci
+                     COLLATE = utf8mb4_general_ci
                      ROW_FORMAT = DYNAMIC;
 
 -- 创建风洞类型表
@@ -55,11 +70,10 @@ CREATE TABLE IF NOT EXISTS wt_type
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '风洞类型' ENGINE = InnoDB
                      CHARACTER SET = utf8mb4
-                     COLLATE = ut8mb4_general_ci
+                     COLLATE = utf8mb4_general_ci
                      ROW_FORMAT = DYNAMIC;
 
 -- 创建模型支撑方式表
@@ -73,11 +87,10 @@ CREATE TABLE IF NOT EXISTS support_mode
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '模型支撑方式' ENGINE = InnoDB
                          CHARACTER SET = utf8mb4
-                         COLLATE = ut8mb4_general_ci
+                         COLLATE = utf8mb4_general_ci
                          ROW_FORMAT = DYNAMIC;
 
 
@@ -92,11 +105,10 @@ CREATE TABLE IF NOT EXISTS trajectory
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '弹道信息' ENGINE = InnoDB
                      CHARACTER SET = utf8mb4
-                     COLLATE = ut8mb4_general_ci
+                     COLLATE = utf8mb4_general_ci
                      ROW_FORMAT = DYNAMIC;
 
 -- 创建飞行试验方式表
@@ -110,11 +122,10 @@ CREATE TABLE IF NOT EXISTS flight_mode
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '飞行试验方式' ENGINE = InnoDB
                          CHARACTER SET = utf8mb4
-                         COLLATE = ut8mb4_general_ci
+                         COLLATE = utf8mb4_general_ci
                          ROW_FORMAT = DYNAMIC;
 
 -- 创建软件信息表
@@ -131,11 +142,10 @@ CREATE TABLE IF NOT EXISTS soft
     update_user_id   BIGINT COMMENT '更新用户id',
     update_time      DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '软件' ENGINE = InnoDB
                  CHARACTER SET = utf8mb4
-                 COLLATE = ut8mb4_general_ci
+                 COLLATE = utf8mb4_general_ci
                  ROW_FORMAT = DYNAMIC;
 
 -- 创建天平表
@@ -157,11 +167,10 @@ CREATE TABLE IF NOT EXISTS balance
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
     FOREIGN KEY (update_user_id) REFERENCES local_user (id),
     FOREIGN KEY (company_design_id) REFERENCES company (id),
-    FOREIGN KEY (company_research_id) REFERENCES company (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (company_research_id) REFERENCES company (id)
 ) COMMENT '天平' ENGINE = InnoDB
                  CHARACTER SET = utf8mb4
-                 COLLATE = ut8mb4_general_ci
+                 COLLATE = utf8mb4_general_ci
                  ROW_FORMAT = DYNAMIC;
 
 -- 创建风洞表
@@ -189,11 +198,10 @@ CREATE TABLE IF NOT EXISTS wind_tunnel
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
     FOREIGN KEY (update_user_id) REFERENCES local_user (id),
     FOREIGN KEY (wt_type_id) REFERENCES wt_type (id),
-    FOREIGN KEY (company_id) REFERENCES company (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (company_id) REFERENCES company (id)
 ) COMMENT '风洞' ENGINE = InnoDB
                  CHARACTER SET = utf8mb4
-                 COLLATE = ut8mb4_general_ci
+                 COLLATE = utf8mb4_general_ci
                  ROW_FORMAT = DYNAMIC;
 
 -- 创建翼舵类型表
@@ -206,11 +214,10 @@ CREATE TABLE IF NOT EXISTS airfoil_type
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '翼舵布局' ENGINE = InnoDB
                      CHARACTER SET = utf8mb4
-                     COLLATE = ut8mb4_general_ci
+                     COLLATE = utf8mb4_general_ci
                      ROW_FORMAT = DYNAMIC;
 
 
@@ -227,11 +234,10 @@ CREATE TABLE IF NOT EXISTS airfoil
     update_time     DATETIME COMMENT '更新时间',
     FOREIGN KEY (airfoil_type_id) REFERENCES airfoil_type (id),
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '翼型' ENGINE = InnoDB
                  CHARACTER SET = utf8mb4
-                 COLLATE = ut8mb4_general_ci
+                 COLLATE = utf8mb4_general_ci
                  ROW_FORMAT = DYNAMIC;
 
 -- 创建翼型坐标表
@@ -248,11 +254,10 @@ CREATE TABLE IF NOT EXISTS airfoil_coordinate
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (airfoil_id) REFERENCES airfoil (id),
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '翼型坐标' ENGINE = InnoDB
                      CHARACTER SET = utf8mb4
-                     COLLATE = ut8mb4_general_ci
+                     COLLATE = utf8mb4_general_ci
                      ROW_FORMAT = DYNAMIC;
 
 -- 创建翼舵构型表
@@ -272,11 +277,10 @@ CREATE TABLE IF NOT EXISTS wingflap_config
     update_user_id      BIGINT COMMENT '更新用户id',
     update_time         DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '翼舵构型' ENGINE = InnoDB
                      CHARACTER SET = utf8mb4
-                     COLLATE = ut8mb4_general_ci
+                     COLLATE = utf8mb4_general_ci
                      ROW_FORMAT = DYNAMIC;
 
 -- 创建翼型截面信息表
@@ -296,11 +300,10 @@ CREATE TABLE IF NOT EXISTS wing_section
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
     FOREIGN KEY (update_user_id) REFERENCES local_user (id),
     FOREIGN KEY (airfoil_id) REFERENCES airfoil (id),
-    FOREIGN KEY (wingflap_config_id) REFERENCES wingflap_config (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (wingflap_config_id) REFERENCES wingflap_config (id)
 ) COMMENT '翼型截面信息' ENGINE = InnoDB
                          CHARACTER SET = utf8mb4
-                         COLLATE = ut8mb4_general_ci
+                         COLLATE = utf8mb4_general_ci
                          ROW_FORMAT = DYNAMIC;
 
 -- 创建翼舵布局表
@@ -328,11 +331,10 @@ CREATE TABLE IF NOT EXISTS wingflap_layout
     update_user_id     BIGINT COMMENT '更新用户id',
     update_time        DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '翼舵布局' ENGINE = InnoDB
                      CHARACTER SET = utf8mb4
-                     COLLATE = ut8mb4_general_ci
+                     COLLATE = utf8mb4_general_ci
                      ROW_FORMAT = DYNAMIC;
 
 -- 创建飞行器子级类型表
@@ -347,11 +349,10 @@ CREATE TABLE IF NOT EXISTS aircraft_sub
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '飞行器子级信息' ENGINE = InnoDB
                            CHARACTER SET = utf8mb4
-                           COLLATE = ut8mb4_general_ci
+                           COLLATE = utf8mb4_general_ci
                            ROW_FORMAT = DYNAMIC;
 
 -- 创建FAS细目类别信息表
@@ -366,11 +367,10 @@ CREATE TABLE IF NOT EXISTS fas
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT 'FAS细目类别信息' ENGINE = InnoDB
                             CHARACTER SET = utf8mb4
-                            COLLATE = ut8mb4_general_ci
+                            COLLATE = utf8mb4_general_ci
                             ROW_FORMAT = DYNAMIC;
 
 -- 创建气动布局类型表
@@ -384,11 +384,10 @@ CREATE TABLE IF NOT EXISTS vehi_type
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT '气动布局类型' ENGINE = InnoDB
                          CHARACTER SET = utf8mb4
-                         COLLATE = ut8mb4_general_ci
+                         COLLATE = utf8mb4_general_ci
                          ROW_FORMAT = DYNAMIC;
 
 -- 创建原型类型表
@@ -403,11 +402,10 @@ CREATE TABLE IF NOT EXISTS prototype_type
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT ='原型类型' ENGINE = InnoDB
                       CHARACTER SET = utf8mb4
-                      COLLATE = ut8mb4_general_ci
+                      COLLATE = utf8mb4_general_ci
                       ROW_FORMAT = DYNAMIC;
 
 
@@ -421,11 +419,10 @@ CREATE TABLE IF NOT EXISTS airfoil_type
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT ='翼型类型' ENGINE = InnoDB
                       CHARACTER SET = utf8mb4
-                      COLLATE = ut8mb4_general_ci
+                      COLLATE = utf8mb4_general_ci
                       ROW_FORMAT = DYNAMIC;
 
 
@@ -440,11 +437,10 @@ CREATE TABLE IF NOT EXISTS engine_type
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT ='发动机类型' ENGINE = InnoDB
                         CHARACTER SET = utf8mb4
-                        COLLATE = ut8mb4_general_ci
+                        COLLATE = utf8mb4_general_ci
                         ROW_FORMAT = DYNAMIC;
 
 
@@ -459,11 +455,10 @@ CREATE TABLE IF NOT EXISTS fuel_type
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT ='燃油类型' ENGINE = InnoDB
                       CHARACTER SET = utf8mb4
-                      COLLATE = ut8mb4_general_ci
+                      COLLATE = utf8mb4_general_ci
                       ROW_FORMAT = DYNAMIC;
 
 -- 创建注油方式表
@@ -477,11 +472,10 @@ CREATE TABLE IF NOT EXISTS inj_mode
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT ='注油方式' ENGINE = InnoDB
                       CHARACTER SET = utf8mb4
-                      COLLATE = ut8mb4_general_ci
+                      COLLATE = utf8mb4_general_ci
                       ROW_FORMAT = DYNAMIC;
 
 -- 创建点火方式表
@@ -495,11 +489,10 @@ CREATE TABLE IF NOT EXISTS file_mode
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT ='点火方式' ENGINE = InnoDB
                       CHARACTER SET = utf8mb4
-                      COLLATE = ut8mb4_general_ci
+                      COLLATE = utf8mb4_general_ci
                       ROW_FORMAT = DYNAMIC;
 
 
@@ -522,11 +515,10 @@ CREATE TABLE IF NOT EXISTS sample
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT ='样本' ENGINE = InnoDB
                   CHARACTER SET = utf8mb4
-                  COLLATE = ut8mb4_general_ci
+                  COLLATE = utf8mb4_general_ci
                   ROW_FORMAT = DYNAMIC;
 
 -- 创建坐标系类别表
@@ -540,11 +532,10 @@ CREATE TABLE IF NOT EXISTS coordinate_type
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT ='坐标系类别' ENGINE = InnoDB
                         CHARACTER SET = utf8mb4
-                        COLLATE = ut8mb4_general_ci
+                        COLLATE = utf8mb4_general_ci
                         ROW_FORMAT = DYNAMIC;
 
 -- 创建坐标系统类别表
@@ -558,11 +549,10 @@ CREATE TABLE IF NOT EXISTS coord_system_type
     update_user_id BIGINT COMMENT '更新用户id',
     update_time    DATETIME COMMENT '更新时间',
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
-    FOREIGN KEY (update_user_id) REFERENCES local_user (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (update_user_id) REFERENCES local_user (id)
 ) COMMENT ='坐标系系统类别' ENGINE = InnoDB
                             CHARACTER SET = utf8mb4
-                            COLLATE = ut8mb4_general_ci
+                            COLLATE = utf8mb4_general_ci
                             ROW_FORMAT = DYNAMIC;
 
 
@@ -596,11 +586,10 @@ CREATE TABLE IF NOT EXISTS aircraft_main
     FOREIGN KEY (update_user_id) REFERENCES local_user (id),
     FOREIGN KEY (vehi_type_id) REFERENCES vehi_type (id),
     FOREIGN KEY (fuel_type_id) REFERENCES fuel_type (id),
-    FOREIGN KEY (engine_type_id) REFERENCES engine_type (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (engine_type_id) REFERENCES engine_type (id)
 ) COMMENT ='飞行器主信息' ENGINE = InnoDB
                           CHARACTER SET = utf8mb4
-                          COLLATE = ut8mb4_general_ci
+                          COLLATE = utf8mb4_general_ci
                           ROW_FORMAT = DYNAMIC;
 
 -- 创建飞行器次级信息表
@@ -621,11 +610,10 @@ CREATE TABLE IF NOT EXISTS aircraft_sec
     FOREIGN KEY (create_user_id) REFERENCES local_user (id),
     FOREIGN KEY (update_user_id) REFERENCES local_user (id),
     FOREIGN KEY (aircraft_main_id) REFERENCES aircraft_main (id),
-    FOREIGN KEY (aircraft_sub_id) REFERENCES aircraft_sub (id),
-    PRIMARY KEY (`id`) USING BTREE
+    FOREIGN KEY (aircraft_sub_id) REFERENCES aircraft_sub (id)
 ) COMMENT ='飞行器次级信息' ENGINE = InnoDB
                             CHARACTER SET = utf8mb4
-                            COLLATE = ut8mb4_general_ci
+                            COLLATE = utf8mb4_general_ci
                             ROW_FORMAT = DYNAMIC;
 
 
