@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: swust-gateway
+  profiles:
+    active: dev

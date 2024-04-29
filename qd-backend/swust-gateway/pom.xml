@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>qd-gateway</artifactId>
+    <artifactId>swust-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>qd-gateway</name>
     <description>qd-gateway</description>
@@ -18,10 +18,9 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>3.0.2</spring-boot.version>
 
-        <service.port>9101</service.port>
-        <service.nodeport>39101</service.nodeport>
+        <service.port>8101</service.port>
+        <service.nodeport>32001</service.nodeport>
     </properties>
 
     <dependencies>
@@ -95,7 +94,15 @@
         </dependency>
 
         <!-- 公共依赖 -->
+        <dependency>
+            <groupId>cn.edu.swust.qd</groupId>
+            <artifactId>common-core</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>cn.edu.swust.qd</groupId>
+            <artifactId>common-redis</artifactId>
+        </dependency>
 
     </dependencies>
     <dependencyManagement>
@@ -135,7 +142,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <mainClass>cn.edu.swust.qd.qdgateway.QdGatewayApplication</mainClass>
+                    <mainClass>cn.edu.swust.qd.gateway.SuwstGatewayApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>
