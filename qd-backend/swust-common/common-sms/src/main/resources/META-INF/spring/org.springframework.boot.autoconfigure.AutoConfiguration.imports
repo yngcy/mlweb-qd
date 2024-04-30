@@ -1,0 +1,2 @@
+cn.edu.swust.qd.common.sms.property.AliyunSmsProperties
+cn.edu.swust.qd.common.sms.service.impl.AliyunSmsService
