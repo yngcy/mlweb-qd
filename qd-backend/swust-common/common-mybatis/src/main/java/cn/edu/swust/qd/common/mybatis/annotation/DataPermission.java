@@ -15,6 +15,10 @@ public @interface DataPermission {
     /**
      * 数据权限 {@link com.baomidou.mybatisplus.extension.plugins.inner.DataPermissionInterceptor}
      */
+    String clAlias() default "";
+
+    String clIdColumnName() default "cl_id";
+
     String userAlias() default "";
 
     String userIdColumnName() default "create_user";

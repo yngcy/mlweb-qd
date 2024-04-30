@@ -1,13 +1,13 @@
 package cn.edu.swust.qd.common.mybatis.handler;
 
+import cn.edu.swust.qd.common.base.IBaseEnum;
+import cn.edu.swust.qd.common.mybatis.annotation.DataPermission;
+import cn.edu.swust.qd.common.mybatis.enums.DataScopeEnum;
+import cn.edu.swust.qd.common.security.utils.SecurityUtils;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.extension.plugins.handler.DataPermissionHandler;
-import com.yocy.common.base.IBaseEnum;
-import com.yocy.common.mybatis.annotation.DataPermission;
-import com.yocy.common.mybatis.enums.DataScopeEnum;
-import com.yocy.common.security.utils.SecurityUtils;
 import lombok.SneakyThrows;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
@@ -44,13 +44,13 @@ public class MyDataPermissionHandler implements DataPermissionHandler {
             if (annotation == null) {
                 return where;
             }
-            // 超级管理员不收数据权限
+            // 超级管理员不受数据权限限制
             if (SecurityUtils.isRoot()) {
                 return where;
             }
             if (ObjectUtils.isNotEmpty(annotation)
                     && (method.getName().equals(methodName) || (method.getName() + "_COUNT").equals(methodName))) {
-                return dataScopeFilter(annotation.deptAlias(), annotation.deptIdColumnName(), annotation.userAlias(), annotation.userIdColumnName(), where);
+                return dataScopeFilter(annotation.clAlias(), annotation.clIdColumnName(), annotation.userAlias(), annotation.userIdColumnName(), where);
             }
         }
         return where;
@@ -59,40 +59,42 @@ public class MyDataPermissionHandler implements DataPermissionHandler {
     /**
      * 根据用户的数据权限范围，对SQL查询进行过滤。
      *
-     * @param deptAlias        部门别名，如果查询中使用了别名
-     * @param deptIdColumName  部门ID的列名
+     * @param clAlias          数据密级别名，如果查询中使用了别名
+     * @param clIdColumName    数据密级ID的列名
      * @param userAlias        用户别名，如果查询中使用了别名
      * @param userIdColumnName 用户ID的列名
      * @param where            原始查询条件表达式
      * @return 过滤后的查询条件表达式，加入了数据权限控制
      */
     @SneakyThrows
-    public static Expression dataScopeFilter(String deptAlias, String deptIdColumName, String userAlias, String userIdColumnName, Expression where) {
-        String deptColumnName = StrUtil.isNotBlank(deptAlias) ? (deptAlias + StringPool.DOT + deptIdColumName) : deptIdColumName;
+    public static Expression dataScopeFilter(String clAlias, String clIdColumName, String userAlias, String userIdColumnName, Expression where) {
+        String clColumnName = StrUtil.isNotBlank(clAlias) ? (clAlias + StringPool.DOT + clIdColumName) : clIdColumName;
         String userColumnName = StrUtil.isNotBlank(userAlias) ? (userAlias + StringPool.DOT + userIdColumnName) : userIdColumnName;
 
         // 获取当前用户的数据权限
         Integer dataScope = SecurityUtils.getDataScope();
         DataScopeEnum dataScopeEnum = IBaseEnum.getEnumByValue(dataScope, DataScopeEnum.class);
 
-        Long deptId, userId;
+        // slId 和 clId 默认一一对应
+        Long slId, userId;
         String appendSqlStr;
         switch (dataScopeEnum) {
             case ALL -> {
                 return where;
             }
-            case DEPT_AND_SUB -> {
-                deptId = SecurityUtils.getDeptId();
-                appendSqlStr = deptColumnName + StringPool.EQUALS + deptId;
+            case CL -> {
+                slId = SecurityUtils.getSecretLevel();
+                appendSqlStr = clColumnName + StringPool.EQUALS + slId;
             }
             case SELF -> {
                 userId = SecurityUtils.getUserId();
                 appendSqlStr = userColumnName + StringPool.EQUALS + userId;
             }
-            // 默认部门及子部门数据权限
+            // 默认密级及子密级数据权限（clId >= slId）
             default -> {
-                deptId = SecurityUtils.getDeptId();
-                appendSqlStr = deptColumnName + " IN ( SELECT id FROM sys_dept WHERE id = " + deptId + " or find_inset( " + deptId + " , tree_path ) ) ";
+                slId = SecurityUtils.getSecretLevel();
+                // todo 支持树形筛选
+                appendSqlStr = clColumnName + StringPool.HTML_GT + slId;
             }
         }
 
