@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9002
 
 spring:
   mvc:
@@ -15,5 +15,5 @@ spring:
         server-addr: http://localhost:8848
         file-extension: yaml
         shared-configs[0]:
-          data-id: qd-common.yaml
+          data-id: swust-common.yaml
           refresh: true

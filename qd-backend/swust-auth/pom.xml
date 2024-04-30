@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>qd-auth</artifactId>
+    <artifactId>swust-auth</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -56,6 +56,21 @@
 
         <dependency>
             <groupId>cn.edu.swust.qd</groupId>
+            <artifactId>ums-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.edu.swust.qd</groupId>
+            <artifactId>system-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.edu.swust.qd</groupId>
+            <artifactId>common-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.edu.swust.qd</groupId>
             <artifactId>common-core</artifactId>
         </dependency>
 
@@ -67,6 +82,16 @@
         <dependency>
             <groupId>cn.edu.swust.qd</groupId>
             <artifactId>common-mybatis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.edu.swust.qd</groupId>
+            <artifactId>common-apidoc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.edu.swust.qd</groupId>
+            <artifactId>common-sms</artifactId>
         </dependency>
 
         <dependency>

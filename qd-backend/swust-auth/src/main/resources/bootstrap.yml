@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: swust-auth
+  profiles:
+    active: dev
