@@ -18,6 +18,11 @@ public interface JwtClaimConstants {
     String USERNAME = "username";
 
     /**
+     * 人员密级ID
+     */
+    String SL_ID = "slId";
+
+    /**
      * 数据权限
      */
     String DATA_SCOPE = "dataScope";
@@ -26,5 +31,10 @@ public interface JwtClaimConstants {
      * 权限（角色role）集合
      */
     String AUTHORITIES = "authorities";
+
+    /**
+     * 成员ID
+     */
+    String MEMBER_ID = "memberId";
 
 }

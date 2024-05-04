@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.edu.swust.qd</groupId>
-        <artifactId>qd-common</artifactId>
+        <artifactId>swust-common</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
