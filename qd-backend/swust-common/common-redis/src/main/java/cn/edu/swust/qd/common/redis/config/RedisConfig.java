@@ -21,8 +21,8 @@ public class RedisConfig {
      * <br/>
      * 修改 Redis 序列化方式，默认 JdkSerializationRedisSerializer
      *
-     * @param redisConnectionFactory
-     * @return
+     * @param redisConnectionFactory {@link RedisConnectionFactory}
+     * @return {@link RedisTemplate}
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
