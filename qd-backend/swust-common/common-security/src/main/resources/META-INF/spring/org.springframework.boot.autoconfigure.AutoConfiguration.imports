@@ -1,0 +1,4 @@
+cn.edu.swust.qd.common.security.service.PermissionService
+cn.edu.swust.qd.common.security.config.ResourceServerConfig
+cn.edu.swust.qd.common.security.exception.MyAccessDeniedHandler
+cn.edu.swust.qd.common.security.exception.MyAuthenticationEntryPoint
