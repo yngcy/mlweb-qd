@@ -24,7 +24,7 @@ public class NamedThreadFactory implements ThreadFactory {
         this.threadGroup = Thread.currentThread().getThreadGroup();
 
         if (StrUtil.isBlank(namePrefix)) {
-            namePrefix = "poll";
+            namePrefix = "pool";
         }
         this.namePrefix = namePrefix + "-" + poolNumber.getAndIncrement() + "-thread-";
     }
