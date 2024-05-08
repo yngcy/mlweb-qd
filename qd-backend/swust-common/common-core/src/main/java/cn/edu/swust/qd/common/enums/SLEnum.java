@@ -1,5 +1,6 @@
 package cn.edu.swust.qd.common.enums;
 
+import cn.edu.swust.qd.common.base.IBaseEnum;
 import lombok.Getter;
 
 /**
@@ -7,7 +8,7 @@ import lombok.Getter;
  *
  * @author <a href="https://github.com/yngcy">YounGCY</a>
  */
-public enum SLEnum {
+public enum SLEnum implements IBaseEnum {
 
     SEC_CP(1, "核心"),
     SEC_IP(2, "重要"),
