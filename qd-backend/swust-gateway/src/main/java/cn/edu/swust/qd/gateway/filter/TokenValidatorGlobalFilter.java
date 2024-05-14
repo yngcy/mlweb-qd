@@ -33,7 +33,7 @@ public class TokenValidatorGlobalFilter implements GlobalFilter, Ordered {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    private static final String BEARER_PREFIX = "Bearer";
+    private static final String BEARER_PREFIX = "Bearer ";
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
