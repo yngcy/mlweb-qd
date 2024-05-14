@@ -237,8 +237,8 @@ public class AuthorizationServerConfig {
         JdbcRegisteredClientRepository registeredClientRepository = new JdbcRegisteredClientRepository(jdbcTemplate);
 
         // 初始化 OAuth2 客户端
-        initOjAppClient(registeredClientRepository);
-        initOjAdminClient(registeredClientRepository);
+        initQdAppClient(registeredClientRepository);
+        initQdAdminClient(registeredClientRepository);
 
         return registeredClientRepository;
     }
@@ -300,13 +300,13 @@ public class AuthorizationServerConfig {
     }
 
     /**
-     * 初始化创建OJ管理客户端
+     * 初始化创建气动管理客户端
      */
-    private void initOjAdminClient(JdbcRegisteredClientRepository registeredClientRepository) {
+    private void initQdAdminClient(JdbcRegisteredClientRepository registeredClientRepository) {
 
-        String clientId = "oj-admin";
+        String clientId = "qd-admin";
         String clientSecret = "123456";
-        String clientName = "OJ 管理客户端";
+        String clientName = "气动管理客户端";
 
         /*
           如果使用明文，客户端认证时会自动升级加密方式，换句话说直接修改客户端密码，所以直接使用 bcrypt 加密避免不必要的麻烦
@@ -314,8 +314,8 @@ public class AuthorizationServerConfig {
          */
         String encodeSecret = passwordEncoder().encode(clientSecret);
 
-        RegisteredClient registeredOjAdminClient = registeredClientRepository.findByClientId(clientId);
-        String id = registeredOjAdminClient != null ? registeredOjAdminClient.getId() : UUID.randomUUID().toString();
+        RegisteredClient registeredQdAdminClient = registeredClientRepository.findByClientId(clientId);
+        String id = registeredQdAdminClient != null ? registeredQdAdminClient.getId() : UUID.randomUUID().toString();
 
         RegisteredClient ojAppClient = RegisteredClient.withId(id)
                 .clientId(clientId)
@@ -337,19 +337,19 @@ public class AuthorizationServerConfig {
     }
 
     /**
-     * 初始化创建OJ APP客户端
+     * 初始化创建气动APP客户端
      */
-    private void initOjAppClient(JdbcRegisteredClientRepository registeredClientRepository) {
+    private void initQdAppClient(JdbcRegisteredClientRepository registeredClientRepository) {
 
-        String clientId = "oj-app";
+        String clientId = "qd-app";
         String clientSecret = "123456";
-        String clientName = "OJ APP客户端";
+        String clientName = "气动APP客户端";
 
         // 如果使用明文，在客户端认证的时候会自动升级加密方式，直接使用 bcrypt 加密避免不必要的麻烦
         String encodeSecret = passwordEncoder().encode(clientSecret);
 
-        RegisteredClient registeredOjAppClient = registeredClientRepository.findByClientId(clientId);
-        String id = registeredOjAppClient != null ? registeredOjAppClient.getId() : UUID.randomUUID().toString();
+        RegisteredClient registeredQdAppClient = registeredClientRepository.findByClientId(clientId);
+        String id = registeredQdAppClient != null ? registeredQdAppClient.getId() : UUID.randomUUID().toString();
 
         RegisteredClient ojAppClient = RegisteredClient.withId(id)
                 .clientId(clientId)

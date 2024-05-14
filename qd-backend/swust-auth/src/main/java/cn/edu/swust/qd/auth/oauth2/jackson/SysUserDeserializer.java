@@ -47,12 +47,12 @@ public class SysUserDeserializer extends JsonDeserializer<SysUserDetails> {
         String username = readJsonNode(jsonNode, "username").asText();
         String password = passwordNode.asText("");
         Integer dataScope = readJsonNode(jsonNode, "dataScope").asInt();
-        Long deptId = readJsonNode(jsonNode, "deptId").asLong();
+        Integer slId = readJsonNode(jsonNode, "slId").asInt();
         boolean enabled = readJsonNode(jsonNode, "enabled").asBoolean();
         boolean accountNonExpired = readJsonNode(jsonNode, "accountNonExpired").asBoolean();
         boolean credentialsNonExpired = readJsonNode(jsonNode, "credentialsNonExpired").asBoolean();
         boolean accountNonLocked = readJsonNode(jsonNode, "accountNonLocked").asBoolean();
-        SysUserDetails result = new SysUserDetails(userId, username, password, dataScope, deptId, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked,
+        SysUserDetails result = new SysUserDetails(userId, username, password, dataScope, slId, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked,
                 authorities);
         if (passwordNode.asText(null) == null) {
             result.eraseCredentials();

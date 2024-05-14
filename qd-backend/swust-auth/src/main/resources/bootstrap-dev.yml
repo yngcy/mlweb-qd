@@ -1,5 +1,5 @@
 server:
-  port: 9002
+  port: 9100
 
 spring:
   mvc:
@@ -10,6 +10,7 @@ spring:
       # 注册中心
       discovery:
         server-addr: http://localhost:8848
+        namespace: qd
       # 配置中心
       config:
         server-addr: http://localhost:8848
@@ -17,3 +18,4 @@ spring:
         shared-configs[0]:
           data-id: swust-common.yaml
           refresh: true
+        namespace: qd

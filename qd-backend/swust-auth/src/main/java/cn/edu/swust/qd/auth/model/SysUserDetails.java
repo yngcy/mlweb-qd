@@ -32,7 +32,7 @@ public class SysUserDetails implements UserDetails, CredentialsContainer {
     /**
      * 扩展字段：人员密级ID
      */
-    private Long slId;
+    private Integer slId;
 
     /**
      * 用户角色数据权限集合
@@ -57,9 +57,9 @@ public class SysUserDetails implements UserDetails, CredentialsContainer {
     public SysUserDetails(UserAuthInfo user) {
         this.setUserId(user.getUserId());
         this.setUsername(user.getUsername());
-        this.setSlId(user.getUserId());
+        this.setSlId(user.getSlId());
         this.setDataScope(user.getDataScope());
-        this.setPassword("${bcrypt}" + user.getPassword());
+        this.setPassword("{bcrypt}" + user.getPassword());
         this.setEnabled(StatusEnum.ENABLE.getValue().equals(user.getStatus()));
         if (CollectionUtil.isNotEmpty(user.getRoles())) {
             authorities = user.getRoles().stream()
@@ -75,7 +75,7 @@ public class SysUserDetails implements UserDetails, CredentialsContainer {
             String username,
             String password,
             Integer dataScope,
-            Long slId,
+            Integer slId,
             boolean enabled,
             boolean accountNonExpired,
             boolean credentialsNonExpired,
