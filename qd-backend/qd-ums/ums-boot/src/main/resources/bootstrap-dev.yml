@@ -1,0 +1,19 @@
+server:
+  port: 8101
+
+spring:
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+        namespace: qd
+      config:
+        server-addr: http://localhost:8848
+        file-extension: yaml
+        namespace: qd
+        shared-configs[0]:
+          data-id: swust-common.yaml
+          refresh: true
