@@ -8,17 +8,17 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>qd-backend</name>
-    <description>启动服务</description>
+    <description>气动管理中心-后端</description>
 
     <modules>
         <!-- 基础模块 -->
-        <module>qd-gateway</module>
-        <module>qd-common</module>
-        <module>qd-auth</module>
-        <module>qd-sysconf</module>
-        <module>qd-system</module>
-        <module>qd-system/system-boot</module>
-        <module>qd-system/system-api</module>
+        <module>swust-common</module>
+        <module>swust-gateway</module>
+        <module>swust-auth</module>
+        <module>swust-system</module>
+        <module>qd-ums</module>
+        <module>qd-scms</module>
+        <module>qd-pjms</module>
 
     </modules>
 
@@ -38,7 +38,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- spring cloud & alibaba -->
-        <spring-boot.version>3.0.2</spring-boot.version>
         <spring-cloud-alibaba.version>2023.0.0.0-RC1</spring-cloud-alibaba.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
 
@@ -78,90 +77,19 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.verison}</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <version>${lombok.version}</version>
         </dependency>
 
-        <!-- redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <!-- elasticsearch-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
-        <!-- https://hutool.cn/docs/index.html#/-->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
         </dependency>
-
-        <!-- knife4j -->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-            <version>${knife4j.version}</version>
-        </dependency>
-        <!-- IdGenerator -->
-        <dependency>
-            <groupId>com.github.yitter</groupId>
-            <artifactId>yitter-idgenerator</artifactId>
-            <version>${idgenerator.version}</version>
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
             <!-- Spring Cloud & Alibaba -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -234,7 +162,7 @@
             <!-- redis 分布式锁 -->
             <dependency>
                 <groupId>org.redisson</groupId>
-                <artifactId>resdisson-spring-boot-starter</artifactId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson.version}</version>
             </dependency>
 
@@ -292,7 +220,43 @@
             </dependency>
             <dependency>
                 <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>common-rabbitmq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
                 <artifactId>common-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>common-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>common-apidoc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>common-seata</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>common-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>system-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>ums-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
@@ -322,23 +286,6 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <!--                <configuration>-->
-                <!--                    <mainClass>cn.edu.swust.qd.qdservice.QdBackendApplication</mainClass>-->
-                <!--                    <skip>true</skip>-->
-                <!--                </configuration>-->
-                <!--                <executions>-->
-                <!--                    <execution>-->
-                <!--                        <id>repackage</id>-->
-                <!--                        <goals>-->
-                <!--                            <goal>repackage</goal>-->
-                <!--                        </goals>-->
-                <!--                    </execution>-->
-                <!--                </executions>-->
             </plugin>
         </plugins>
     </build>
