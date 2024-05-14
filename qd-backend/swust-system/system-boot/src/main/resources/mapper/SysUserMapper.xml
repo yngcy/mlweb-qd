@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swust.qd.system.mapper.SysUserMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.swust.qd.system.model.entity.SysUser">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="TINYINT"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="slId" column="sl_id" jdbcType="INTEGER"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+        <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,username,nickname,
+        gender,password,avatar,
+        sl_id,mobile,status,
+        email,deleted,create_time,
+        update_time,create_user,update_user
+    </sql>
+    <select id="getUserProfile" resultType="cn.edu.swust.qd.system.model.dto.UserProfileDTO">
+        SELECT u.id,
+               u.username,
+               u.nickname,
+               u.mobile,
+               u.gender,
+               u.avatar,
+               u.status,
+               sl.name              as sl,
+               GROUP_CONCAT(r.name) AS roleName,
+               u.create_time
+        FROM sys_user u
+                 LEFT JOIN sys_user_role ur ON u.id = ur.user_id
+                 LEFT JOIN sys_role r ON ur.role_id = r.id
+                 LEFT JOIN sys_secret_level sl ON u.sl_id = sl.id
+        WHERE u.deleted = 0
+          AND u.id = #{id}
+    </select>
+
+    <!-- 用户认证信息映射 -->
+    <resultMap id="UserAuthMap" type="cn.edu.swust.qd.system.dto.UserAuthInfo">
+        <id property="userId" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="username"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="status" column="STATUS"/>
+        <result property="slId" column="sl_id"/>
+        <result property="nickname" column="nickname"/>
+        <result property="mobile" column="mobile"/>
+        <result property="email" column="email"/>
+        <result property="avatar" column="avatar"/>
+        <collection property="roles" ofType="string" javaType="java.util.Set">
+            <result column="code"/>
+        </collection>
+    </resultMap>
+
+    <!-- 根据用户名获取认证信息 -->
+    <select id="getUserAuthInfo" resultMap="UserAuthMap">
+        SELECT t1.id,
+               t1.username,
+               t1.nickname,
+               t1.PASSWORD,
+               t1.STATUS,
+               t1.sl_id,
+               t3.CODE,
+               t1.avatar,
+               t1.mobile,
+               t1.email
+        FROM sys_user t1
+                 LEFT JOIN sys_user_role t2 ON t2.user_id = t1.id
+                 LEFT JOIN sys_role t3 ON t3.id = t2.role_id
+        WHERE t1.deleted = 0
+          AND t1.username = #{username}
+    </select>
+</mapper>
