@@ -9,6 +9,7 @@ import io.swagger.v3.oas.models.security.OAuthFlow;
 import io.swagger.v3.oas.models.security.OAuthFlows;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -42,6 +43,10 @@ public class OpenApiConfig {
      */
     @Bean
     public OpenAPI apiInfo() {
+
+        // 设置网关地址
+        Server server = new Server().url("http://localhost:9999").description("Gateway URL");
+
         return new OpenAPI()
                 .components(new Components()
                         .addSecuritySchemes(HttpHeaders.AUTHORIZATION,
@@ -76,7 +81,7 @@ public class OpenApiConfig {
                         )
                         .license(new License().name(apiDocInfoProperties.getLicense().getName())
                                 .url(apiDocInfoProperties.getLicense().getUrl())
-                        ));
+                        ))
+                .addServersItem(server);
     }
-
 }
