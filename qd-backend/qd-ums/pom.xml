@@ -7,10 +7,14 @@
         <groupId>cn.edu.swust.qd</groupId>
         <artifactId>qd-backend</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>system-boot</artifactId>
+    <artifactId>qd-ums</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ums-boot</module>
+        <module>ums-api</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
