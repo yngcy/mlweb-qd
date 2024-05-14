@@ -1,6 +1,7 @@
 package cn.edu.swust.qd.auth.oauth2.handler;
 
-import com.alibaba.nacos.api.model.v2.Result;
+
+import cn.edu.swust.qd.common.result.Result;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -38,7 +39,7 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         OAuth2Error error = ((OAuth2AuthenticationException) exception).getError();
         ServletServerHttpResponse httpResponse = new ServletServerHttpResponse(response);
-        Result result = Result.failure(error.getErrorCode());
+        Result result = Result.failed(error.getErrorCode());
         accessTokenHttpResponseConverter.write(result, null, httpResponse);
     }
 }

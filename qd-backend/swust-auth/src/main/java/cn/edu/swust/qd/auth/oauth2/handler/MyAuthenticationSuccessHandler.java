@@ -1,6 +1,6 @@
 package cn.edu.swust.qd.auth.oauth2.handler;
 
-import com.alibaba.nacos.api.model.v2.Result;
+import cn.edu.swust.qd.common.result.Result;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,6 +28,9 @@ import java.util.Map;
  */
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
+    /**
+     * MappingJackson2HttpMessageConverter 是 Spring 框架提供的一个 HTTP 消息转换器，用于将 HTTP 请求和响应的 JSON 数据与 Java 对象之间进行转换
+     */
     private final HttpMessageConverter<Object> accessTokenHttpResponseConverter = new MappingJackson2HttpMessageConverter();
     private final Converter<OAuth2AccessTokenResponse, Map<String, Object>> accessTokenResponseParametersConverter = new DefaultOAuth2AccessTokenResponseMapConverter();
 
