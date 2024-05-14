@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>qd-common</artifactId>
+    <artifactId>swust-common</artifactId>
     <packaging>pom</packaging>
 
     <modules>
@@ -17,6 +17,11 @@
         <module>common-mybatis</module>
         <module>common-redis</module>
         <module>common-security</module>
+        <module>common-web</module>
+        <module>common-apidoc</module>
+        <module>common-seata</module>
+        <module>common-sms</module>
+        <module>common-rabbitmq</module>
     </modules>
 
     <properties>
