@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * @author <a href="https://github.com/yngcy">YounGCY</a>
  */
-@Tag(name = "sys_user-api", description = "用户接口")
+@Tag(name = "用户接口")
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor

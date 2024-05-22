@@ -54,7 +54,7 @@ public class SysSecurityLevelController {
     }
 
     @Operation(summary = "新增数据密级")
-    @PostMapping
+    @PostMapping("/cl")
     @PreAuthorize("@ss.hasPerm('sys:cl:add')")
     @PreventDuplicateResubmit
     public Result addCL(@Valid @RequestBody CLForm clForm) {
@@ -65,10 +65,10 @@ public class SysSecurityLevelController {
     @Operation(summary = "数据密级表单数据")
     @GetMapping("/cl/{clId}/form")
     public Result<CLForm> getCLForm(
-            @Parameter(description = "数据密级ID") @PathVariable Long CLId
+            @Parameter(description = "数据密级ID") @PathVariable Long clId
     ) {
-        CLForm CLForm = clService.getCLForm(CLId);
-        return Result.success(CLForm);
+        CLForm clForm = clService.getCLForm(clId);
+        return Result.success(clForm);
     }
 
     @Operation(summary = "修改数据密级")
@@ -127,7 +127,7 @@ public class SysSecurityLevelController {
     }
 
     @Operation(summary = "新增人员密级")
-    @PostMapping
+    @PostMapping("/sl")
     @PreAuthorize("@ss.hasPerm('sys:sl:add')")
     @PreventDuplicateResubmit
     public Result addSL(@Valid @RequestBody SLForm slForm) {
@@ -140,15 +140,15 @@ public class SysSecurityLevelController {
     public Result<SLForm> getSLForm(
             @Parameter(description = "人员密级ID") @PathVariable Long slId
     ) {
-        SLForm SLForm = slService.getSLForm(slId);
-        return Result.success(SLForm);
+        SLForm slForm = slService.getSLForm(slId);
+        return Result.success(slForm);
     }
 
     @Operation(summary = "修改人员密级")
     @PutMapping(value = "/sl/{id}")
     @PreAuthorize("@ss.hasPerm('sys:sl:edit')")
-    public Result updateSL(@Valid @RequestBody SLForm SLForm) {
-        boolean result = slService.saveSL(SLForm);
+    public Result updateSL(@Valid @RequestBody SLForm slForm) {
+        boolean result = slService.saveSL(slForm);
         return Result.judge(result);
     }
 

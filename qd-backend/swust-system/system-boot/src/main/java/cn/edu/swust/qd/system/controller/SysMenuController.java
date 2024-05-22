@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 菜单控制器
  */
-@Tag(name = "sys_menu-api", description = "菜单接口")
+@Tag(name = "菜单接口")
 @RestController
 @RequestMapping("/api/v1/menus")
 @RequiredArgsConstructor

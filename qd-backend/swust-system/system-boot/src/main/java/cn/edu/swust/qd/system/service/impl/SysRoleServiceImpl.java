@@ -178,7 +178,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
             roleMenuService.saveBatch(roleMenus);
         }
 
-        // 刷新橘色的权限缓存
+        // 刷新角色的权限缓存
         roleMenuService.refreshRolePermsCache(role.getCode());
         return true;
     }

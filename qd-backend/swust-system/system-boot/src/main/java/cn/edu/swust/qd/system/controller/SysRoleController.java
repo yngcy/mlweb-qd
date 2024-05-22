@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @author <a href="https://github.com/yngcy">YounGCY</a>
  */
-@Tag(name = "sys_role-api", description = "角色接口")
+@Tag(name = "角色接口")
 @RestController
 @RequestMapping("/api/v1/roles")
 @RequiredArgsConstructor
