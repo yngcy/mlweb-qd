@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swust.qd.scms.mapper.ScmsWindTunnelMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.swust.qd.scms.model.entity.ScmsWindTunnel">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="code" column="code" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="wtTypeId" column="wt_type_id" jdbcType="BIGINT"/>
+        <result property="companyId" column="company_id" jdbcType="BIGINT"/>
+        <result property="rangeTestTime" column="range_test_time" jdbcType="VARCHAR"/>
+        <result property="lenTetssec" column="len_tetssec" jdbcType="VARCHAR"/>
+        <result property="sizeTestesc" column="size_testesc" jdbcType="VARCHAR"/>
+        <result property="sizeNozexit" column="size_nozexit" jdbcType="VARCHAR"/>
+        <result property="rangeV" column="range_v" jdbcType="VARCHAR"/>
+        <result property="rangeRe" column="range_re" jdbcType="VARCHAR"/>
+        <result property="rangeNusselt" column="range_nusselt" jdbcType="VARCHAR"/>
+        <result property="rangePt" column="range_pt" jdbcType="VARCHAR"/>
+        <result property="rangeTt" column="range_tt" jdbcType="VARCHAR"/>
+        <result property="rangeAlt" column="range_alt" jdbcType="VARCHAR"/>
+        <result property="security" column="security" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+        <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,code,name,
+        wt_type_id,company_id,range_test_time,
+        len_tetssec,size_testesc,size_nozexit,
+        range_v,range_re,range_nusselt,
+        range_pt,range_tt,range_alt,
+        security,create_time,update_time,
+        create_user,update_user
+    </sql>
+    <select id="getWindTunnelPage" resultType="cn.edu.swust.qd.scms.model.bo.WindTunnelBO">
+        SELECT w.id,
+               w.code,
+               w.name,
+               t.name AS wt_type,
+               c.name AS company,
+               w.range_test_time,
+               w.len_tetssec,
+               w.size_testesc,
+               w.size_nozexit,
+               w.range_v,
+               w.range_re,
+               w.range_nusselt,
+               w.range_pt,
+               w.range_tt,
+               w.range_alt,
+               w.security,
+               w.create_time,
+               w.update_time,
+               w.create_user,
+               w.update_user
+        FROM scms_wind_tunnel w
+                 LEFT JOIN scms_wind_tunnel_type t ON w.wt_type_id = t.id
+                 LEFT JOIN scms_company c ON w.company_id = c.id
+        GROUP BY w.id;
+    </select>
+</mapper>

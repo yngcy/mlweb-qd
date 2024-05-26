@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swust.qd.scms.mapper.ScmsAircraftMainMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.swust.qd.scms.model.entity.ScmsAircraftMain">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="vehiTypeId" column="vehi_type_id" jdbcType="BIGINT"/>
+        <result property="fuelTypeId" column="fuel_type_id" jdbcType="BIGINT"/>
+        <result property="vehiId" column="vehi_id" jdbcType="BIGINT"/>
+        <result property="vehiName" column="vehi_name" jdbcType="VARCHAR"/>
+        <result property="designDepartment" column="design_department" jdbcType="VARCHAR"/>
+        <result property="designPerson" column="design_person" jdbcType="VARCHAR"/>
+        <result property="designDate" column="design_date" jdbcType="TIMESTAMP"/>
+        <result property="engineTypeId" column="engine_type_id" jdbcType="BIGINT"/>
+        <result property="moduleNum" column=" module_num" jdbcType="BIGINT"/>
+        <result property="launchPlatform" column="launch_platform" jdbcType="VARCHAR"/>
+        <result property="stagesLv" column="stages_lv" jdbcType="BIGINT"/>
+        <result property="machTurn" column="mach_turn" jdbcType="VARCHAR"/>
+        <result property="altiTurn" column="alti_turn" jdbcType="VARCHAR"/>
+        <result property="machCruise" column="mach_cruise" jdbcType="VARCHAR"/>
+        <result property="altiCruise" column="alti_cruise" jdbcType="VARCHAR"/>
+        <result property="machDive" column="mach_dive" jdbcType="VARCHAR"/>
+        <result property="altiDive" column="alti_dive" jdbcType="VARCHAR"/>
+        <result property="range" column="range" jdbcType="VARCHAR"/>
+        <result property="security" column="security" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+        <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,vehi_type_id,fuel_type_id,
+        vehi_id,vehi_name,design_department,
+        design_person,design_date,engine_type_id,
+        module_num,launch_platform,stages_lv,
+        mach_turn,alti_turn,mach_cruise,
+        alti_cruise,mach_dive,alti_dive,
+        range,security,create_time,
+        update_time,create_user,update_user
+    </sql>
+    <select id="getAircraftMainPage" resultType="cn.edu.swust.qd.scms.model.bo.AircraftMainBO">
+        SELECT a.id,
+               v.name AS vehi_type,
+               f.name AS fuel_type,
+               a.vehi_id,
+               a.vehi_name,
+               a.design_department,
+               a.design_person,
+               a.design_date,
+               e.name AS engine_type,
+               a.module_num,
+               a.launch_platform,
+               a.stages_lv,
+               a.mach_turn,
+               a.alti_turn,
+               a.mach_cruise,
+               a.alti_cruise,
+               a.mach_dive,
+               a.alti_dive,
+               a.range,
+               a.security,
+               a.create_time,
+               a.update_time,
+               a.create_user,
+               a.update_user
+        FROM scms_aircraft_main a
+                 LEFT JOIN scms_vehi_type v ON a.vehi_type_id = v.id
+                 LEFT JOIN scms_fuel_type f ON a.fuel_type_id = f.id
+                 LEFT JOIN scms_engine_type e ON a.engine_type_id = e.id
+        GROUP BY a.id
+
+    </select>
+</mapper>

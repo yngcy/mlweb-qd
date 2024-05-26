@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swust.qd.scms.mapper.ScmsSampleMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.swust.qd.scms.model.entity.ScmsSample">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="dataType" column="data_type" jdbcType="VARCHAR"/>
+        <result property="fileFormat" column="file_format" jdbcType="VARCHAR"/>
+        <result property="companyId" column="company_id" jdbcType="BIGINT"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="downloadPath" column="download_path" jdbcType="VARCHAR"/>
+        <result property="locations" column="locations" jdbcType="VARCHAR"/>
+        <result property="parseId" column="parse_id" jdbcType="BIGINT"/>
+        <result property="sheetIndex" column="sheet_index" jdbcType="INTEGER"/>
+        <result property="titleIndex" column="title_index" jdbcType="INTEGER"/>
+        <result property="security" column="security" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+        <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,data_type,
+        file_format,company_id,description,
+        download_path,locations,parse_id,
+        sheet_index,title_index,security,
+        create_time,update_time,create_user,
+        update_user
+    </sql>
+    <select id="getSamplePage" resultType="cn.edu.swust.qd.scms.model.bo.SampleBO">
+        SELECT
+        s.id,
+        s.name,
+        s.data_type,
+        s.file_format,
+        c.name AS company,
+        s.description,
+        s.download_path,
+        s.locations,
+        s.parse_id,
+        s.sheet_index,
+        s.title_index,
+        s.security,
+        s.create_time,
+        s.update_time,
+        s.create_user,
+        s.update_user
+        FROM
+        scms_sample s
+        LEFT JOIN scms_company c ON s.company_id = c.id
+        GROUP BY s.id;
+    </select>
+</mapper>

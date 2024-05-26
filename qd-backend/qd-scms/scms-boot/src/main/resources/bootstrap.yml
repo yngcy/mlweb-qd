@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: qd-scms
+  profiles:
+    active: dev

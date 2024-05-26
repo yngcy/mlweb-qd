@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swust.qd.scms.mapper.ScmsAircraftSecMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.swust.qd.scms.model.entity.ScmsAircraftSec">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="aircraftMainId" column="aircraft_main_id" jdbcType="BIGINT"/>
+        <result property="aircraftSubId" column="aircraft_sub_id" jdbcType="BIGINT"/>
+        <result property="length" column="length" jdbcType="DOUBLE"/>
+        <result property="numFace" column="num_face" jdbcType="INTEGER"/>
+        <result property="maxWidth" column="max_width" jdbcType="DOUBLE"/>
+        <result property="maxCrossArea" column="max_cross_area" jdbcType="DOUBLE"/>
+        <result property="maxBottomArea" column="max_bottom_area" jdbcType="DOUBLE"/>
+        <result property="security" column="security" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+        <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,aircraft_main_id,aircraft_sub_id,
+        length,num_face,max_width,
+        max_cross_area,max_bottom_area,security,
+        create_time,update_time,create_user,
+        update_user
+    </sql>
+</mapper>

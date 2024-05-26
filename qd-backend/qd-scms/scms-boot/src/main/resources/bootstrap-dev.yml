@@ -1,0 +1,23 @@
+server:
+  port: 8102
+
+spring:
+  main:
+    allow-circular-references: true # 允许对象循环引用
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher
+  cloud:
+    nacos:
+      # 注册中心
+      discovery:
+        server-addr: http://localhost:8848
+        namespace: qd
+      # 配置中心
+      config:
+        server-addr: http://localhost:8848
+        file-extension: yaml
+        namespace: qd
+        shared-configs[0]:
+          data-id: swust-common.yaml
+          refresh: true

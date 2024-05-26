@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swust.qd.scms.mapper.ScmsWingSectionMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.swust.qd.scms.model.entity.ScmsWingSection">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="airfoilId" column="airfoil_id" jdbcType="BIGINT"/>
+        <result property="sectionNumber" column="section_number" jdbcType="BIGINT"/>
+        <result property="sectionLocation" column="section_location" jdbcType="VARCHAR"/>
+        <result property="wingProportion" column="wing_proportion" jdbcType="DOUBLE"/>
+        <result property="wingflapConfigId" column="wingflap_config_id" jdbcType="BIGINT"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="security" column="security" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+        <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,airfoil_id,section_number,
+        section_location,wing_proportion,wingflap_config_id,
+        description,security,create_time,
+        update_time,create_user,update_user
+    </sql>
+    <select id="getWingSectionPage" resultType="cn.edu.swust.qd.scms.model.bo.WingSectionBO">
+        SELECT w.id,
+               a.name AS airfoil,
+               w.section_number,
+               w.section_location,
+               w.wing_proportion,
+               w.wingflap_config_id,
+               w.description,
+               w.security,
+               w.create_time,
+               w.update_time,
+               w.create_user,
+               w.update_user
+        FROM scms_wing_section w
+                 LEFT JOIN scms_airfoil a ON w.airfoil_id = a.id
+        GROUP BY w.id
+    </select>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swust.qd.scms.mapper.ScmsAircraftSubMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.swust.qd.scms.model.entity.ScmsAircraftSub">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="airfoilId" column="airfoil_id" jdbcType="BIGINT"/>
+        <result property="security" column="security" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+        <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,description,
+        airfoil_id,security,create_time,
+        update_time,create_user,update_user
+    </sql>
+    <select id="getAircraftSubPage" resultType="cn.edu.swust.qd.scms.model.bo.AircraftSubBO">
+        SELECT s.id,
+               s.name,
+               s.description,
+               a.name AS airfiol,
+               s.security,
+               s.create_time,
+               s.update_time,
+               s.create_user,
+               s.update_user
+        FROM scms_aircraft_sub s
+                 LEFT JOIN scms_airfoil a ON s.airfoil_id = a.id
+        GROUP BY s.id
+    </select>
+</mapper>

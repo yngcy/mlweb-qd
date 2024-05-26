@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swust.qd.scms.mapper.ScmsWingflapConfigMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.swust.qd.scms.model.entity.ScmsWingflapConfig">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="area" column="area" jdbcType="DOUBLE"/>
+        <result property="exposedLength" column="exposed_length" jdbcType="DOUBLE"/>
+        <result property="chordLength" column="chord_length" jdbcType="DOUBLE"/>
+        <result property="twistChordAngle" column="twist_chord_angle" jdbcType="DOUBLE"/>
+        <result property="leSweepBackAngle" column="le_sweep_back_angle" jdbcType="DOUBLE"/>
+        <result property="teSweepBackAngle" column="te_sweep_back_angle" jdbcType="DOUBLE"/>
+        <result property="dihedralAngle" column="dihedral_angle" jdbcType="DOUBLE"/>
+        <result property="security" column="security" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+        <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,area,
+        exposed_length,chord_length,twist_chord_angle,
+        le_sweep_back_angle,te_sweep_back_angle,dihedral_angle,
+        security,create_time,update_time,
+        create_user,update_user
+    </sql>
+</mapper>

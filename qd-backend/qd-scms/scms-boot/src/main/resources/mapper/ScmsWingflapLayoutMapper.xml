@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swust.qd.scms.mapper.ScmsWingflapLayoutMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.swust.qd.scms.model.entity.ScmsWingflapLayout">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="wingflapNum" column="wingflap_num" jdbcType="INTEGER"/>
+        <result property="fixedPneNum" column="fixed_pne_num" jdbcType="INTEGER"/>
+        <result property="activePneNum" column="active_pne_num" jdbcType="INTEGER"/>
+        <result property="pitchWingflapNum" column="pitch_wingflap_num" jdbcType="INTEGER"/>
+        <result property="pitchIdSet" column="pitch_id_set" jdbcType="VARCHAR"/>
+        <result property="yawWingflapNum" column="yaw_wingflap_num" jdbcType="INTEGER"/>
+        <result property="yawWingflapSet" column="yaw_wingflap_set" jdbcType="VARCHAR"/>
+        <result property="rollWingflapNum" column="roll_wingflap_num" jdbcType="INTEGER"/>
+        <result property="rollWingflapSet" column="roll_wingflap_set" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="wingflapImg" column="wingflap_img" jdbcType="VARCHAR"/>
+        <result property="deformula" column="deformula" jdbcType="VARCHAR"/>
+        <result property="drformula" column="drformula" jdbcType="VARCHAR"/>
+        <result property="daformula" column="daformula" jdbcType="VARCHAR"/>
+        <result property="security" column="security" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+        <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,type,
+        wingflap_num,fixed_pne_num,active_pne_num,
+        pitch_wingflap_num,pitch_id_set,yaw_wingflap_num,
+        yaw_wingflap_set,roll_wingflap_num,roll_wingflap_set,
+        remark,wingflap_img,deformula,
+        drformula,daformula,security,
+        create_time,update_time,create_user,
+        update_user
+    </sql>
+</mapper>
