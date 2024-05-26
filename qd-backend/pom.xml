@@ -259,6 +259,12 @@
                 <artifactId>ums-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.edu.swust.qd</groupId>
+                <artifactId>scms-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
