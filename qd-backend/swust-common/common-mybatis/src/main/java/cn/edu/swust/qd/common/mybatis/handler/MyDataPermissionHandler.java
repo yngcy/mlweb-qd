@@ -36,7 +36,7 @@ public class MyDataPermissionHandler implements DataPermissionHandler {
     public Expression getSqlSegment(Expression where, String mappedStatementId) {
 
         Class<?> clazz = Class.forName(mappedStatementId.substring(0, mappedStatementId.lastIndexOf(StringPool.DOT)));
-        String methodName = mappedStatementId.substring(mappedStatementId.lastIndexOf(StringPool.DOT));
+        String methodName = mappedStatementId.substring(mappedStatementId.lastIndexOf(StringPool.DOT) + 1);
         Method[] methods = clazz.getDeclaredMethods();
         for (Method method : methods) {
             DataPermission annotation = method.getAnnotation(DataPermission.class);
@@ -93,8 +93,8 @@ public class MyDataPermissionHandler implements DataPermissionHandler {
             // 默认密级及子密级数据权限（clId >= slId）
             default -> {
                 slId = SecurityUtils.getSecretLevel();
-                // todo 支持树形筛选
-                appendSqlStr = clColumnName + StringPool.HTML_GT + slId;
+                // 密级值越小，越小密级
+                appendSqlStr = clColumnName + " <= " + slId;
             }
         }
 
