@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author <a href="https://github.com/yngcy">YounGCY</a>
  */
-@Tag(name = "ums_app-api", description = "成员接口")
+@Tag(name = "成员接口")
 @RestController
 @RequestMapping("/app-api/v1/members")
 @RequiredArgsConstructor

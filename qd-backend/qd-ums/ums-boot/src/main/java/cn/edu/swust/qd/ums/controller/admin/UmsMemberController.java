@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author <a href="https://github.com/yngcy">YounGCY</a>
  */
-@Tag(name = "ums_admin-api", description = "成员管理服务")
+@Tag(name = "成员管理服务")
 @RestController
 @RequestMapping("/api/v1/members")
 @RequiredArgsConstructor
@@ -33,14 +33,14 @@ public class UmsMemberController {
         return PageResult.success(result);
     }
 
-    @Operation(summary = "修改会员")
+    @Operation(summary = "修改成员")
     @PutMapping("/{memberId}")
     public Result updateMember(@Valid @RequestBody MemberForm memberForm) {
         boolean result = memberService.updateMember(memberForm);
         return Result.judge(result);
     }
 
-    @Operation(summary = "修改会员状态")
+    @Operation(summary = "修改成员状态")
     @PatchMapping("/{memberId}/status")
     public Result updateMemberStatus(
             @Parameter(description = "成员ID") @PathVariable Long memberId,
