@@ -23,6 +23,6 @@ public class BaseQdDataForm implements Serializable {
 
     @Schema(description = "自定密级")
     @NotBlank(message = "自定密级不能为空")
-    private String security;
+    private Integer security;
 
 }
