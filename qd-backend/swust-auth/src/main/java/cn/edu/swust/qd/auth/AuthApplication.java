@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @author <a href="https://github.com/yngcy">YounGCY</a>
  */
 @EnableFeignClients(basePackageClasses = {UserFeignClient.class, MemberFeignClient.class})
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "cn.edu.swust.qd")
 @EnableDiscoveryClient
 public class AuthApplication {
 
