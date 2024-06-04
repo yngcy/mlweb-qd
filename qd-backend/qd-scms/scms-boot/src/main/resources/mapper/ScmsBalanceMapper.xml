@@ -31,9 +31,9 @@
     </sql>
     <select id="getBalancePage" resultType="cn.edu.swust.qd.scms.model.bo.BalanceBO">
         SELECT b.id,
-               c.name          AS company_desgin,
-               c.name          AS company_research,
-               bt.balance_type AS balance_type,
+               c1.name AS company_design,
+               c2.name AS company_research,
+               bt.name AS balance_type,
                b.code,
                b.name,
                b.load,
@@ -45,7 +45,8 @@
                b.create_user,
                b.update_user
         FROM scms_balance b
-                 LEFT JOIN scms_company c ON b.company_id = c.id
+                 LEFT JOIN scms_company c1 ON b.company_design_id = c1.id
+                 LEFT JOIN scms_company c2 ON b.company_research_id = c2.id
                  LEFT JOIN scms_balance_type bt ON b.balance_type_id = bt.id
         GROUP BY b.id;
     </select>

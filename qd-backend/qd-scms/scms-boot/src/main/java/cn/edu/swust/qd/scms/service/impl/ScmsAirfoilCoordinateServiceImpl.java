@@ -51,8 +51,15 @@ public class ScmsAirfoilCoordinateServiceImpl extends ServiceImpl<ScmsAirfoilCoo
         }
 
         ScmsAirfoilCoordinate airfoilCoordinate = scmsAirfoilCoordinateConverter.form2Entity(airfoilCoordinateForm);
-        boolean result = this.save(airfoilCoordinate);
+        boolean result = this.saveOrUpdate(airfoilCoordinate);
         return result;
+    }
+
+    @Override
+    public boolean saveAirfoilCoordinates(List<AirfoilCoordinateForm> airfoilCoordinateForms) {
+        return this.saveOrUpdateBatch(
+                airfoilCoordinateForms.stream().map(scmsAirfoilCoordinateConverter::form2Entity).toList()
+        );
     }
 
     @Override
@@ -78,6 +85,17 @@ public class ScmsAirfoilCoordinateServiceImpl extends ServiceImpl<ScmsAirfoilCoo
     @Override
     public boolean hasAirfoilCoordinate(Long airfoilId) {
         return this.count(new LambdaQueryWrapper<ScmsAirfoilCoordinate>().eq(ScmsAirfoilCoordinate::getAirfoilId, airfoilId)) > 0;
+    }
+
+    @Override
+    public List<AirfoilCoordinateForm> listAirfoilCoordinatesByAirfoilId(Long airfoilId) {
+        List<ScmsAirfoilCoordinate> entities = this.list(new LambdaQueryWrapper<ScmsAirfoilCoordinate>().eq(ScmsAirfoilCoordinate::getAirfoilId, airfoilId));
+
+        if (entities != null) {
+            return entities.stream().map(scmsAirfoilCoordinateConverter::entity2Form).toList();
+        }
+
+        return List.of();
     }
 }
 

@@ -61,4 +61,13 @@ public interface ScmsAircraftSecService extends IService<ScmsAircraftSec> {
      * @return 引用返回 true，否则 false
      */
     boolean isSubReferenced(Long aircraftSubId);
+
+    /**
+     * 修改飞行器次级信息密级
+     *
+     * @param aircraftSecId
+     * @param security
+     * @return
+     */
+    boolean updateSecurity(Long aircraftSecId, Integer security);
 }

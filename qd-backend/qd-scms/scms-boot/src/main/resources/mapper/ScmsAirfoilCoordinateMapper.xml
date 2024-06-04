@@ -38,4 +38,20 @@
                  LEFT JOIN scms_airfoil a ON c.airfoil_id = a.id
         GROUP BY c.id;
     </select>
+
+    <!-- 根据翼型信息ID获取翼型坐标 -->
+    <select id="getCoordinateByAirfoilId" resultType="cn.edu.swust.qd.scms.model.entity.ScmsAirfoilCoordinate">
+        SELECT id,
+               surface_ident,
+               along_string_x,
+               airfoil_face_y,
+               airfoil_id,
+               security,
+               create_time,
+               update_time,
+               create_user,
+               update_user
+        FROM scms_airfoil_coordinate
+        WHERE airfoil_id = #{airfoilId}
+    </select>
 </mapper>

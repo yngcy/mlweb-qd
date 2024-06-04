@@ -64,7 +64,7 @@ public class ScmsAirfoilTypeServiceImpl extends ServiceImpl<ScmsAirfoilTypeMappe
         }
 
         ScmsAirfoilType airfoilType = scmsAirfoilTypeConverter.form2Entity(airfoilTypeForm);
-        boolean result = this.save(airfoilType);
+        boolean result = this.saveOrUpdate(airfoilType);
         return result;
     }
 

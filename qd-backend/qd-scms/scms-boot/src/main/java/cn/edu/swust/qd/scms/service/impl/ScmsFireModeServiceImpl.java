@@ -57,7 +57,7 @@ public class ScmsFireModeServiceImpl extends ServiceImpl<ScmsFireModeMapper, Scm
         }
 
         ScmsFireMode fireMode = scmsFireModeConverter.form2Entity(fireModeForm);
-        boolean result = this.save(fireMode);
+        boolean result = this.saveOrUpdate(fireMode);
 
         return result;
     }

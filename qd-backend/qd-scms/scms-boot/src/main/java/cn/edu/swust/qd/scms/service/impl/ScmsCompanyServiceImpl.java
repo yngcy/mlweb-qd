@@ -3,6 +3,7 @@ package cn.edu.swust.qd.scms.service.impl;
 import cn.edu.swust.qd.common.web.model.Option;
 import cn.edu.swust.qd.scms.converter.ScmsCompanyConverter;
 import cn.edu.swust.qd.scms.mapper.ScmsCompanyMapper;
+import cn.edu.swust.qd.scms.model.bo.CompanyBO;
 import cn.edu.swust.qd.scms.model.entity.ScmsCompany;
 import cn.edu.swust.qd.scms.model.form.CompanyForm;
 import cn.edu.swust.qd.scms.model.query.CompanyPageQuery;
@@ -45,9 +46,9 @@ public class ScmsCompanyServiceImpl extends ServiceImpl<ScmsCompanyMapper, ScmsC
 
     @Override
     public Page<CompanyPageVO> getCompanyPage(CompanyPageQuery queryParams) {
-        Page<ScmsCompany> companyPage = this.page(
-                new Page<>(queryParams.getPageNum(), queryParams.getPageSize()));
-        Page<CompanyPageVO> page = scmsCompanyConverter.entity2VO(companyPage);
+        Page<CompanyBO> companyPage = this.baseMapper.getCompanyPage(
+                new Page<CompanyBO>(queryParams.getPageNum(), queryParams.getPageSize()));
+        Page<CompanyPageVO> page = scmsCompanyConverter.bo2VO(companyPage);
         return page;
     }
 
@@ -72,7 +73,7 @@ public class ScmsCompanyServiceImpl extends ServiceImpl<ScmsCompanyMapper, ScmsC
 
         // 实体转换
         ScmsCompany company = scmsCompanyConverter.form2Entity(companyForm);
-        boolean result = this.save(company);
+        boolean result = this.saveOrUpdate(company);
         return result;
     }
 

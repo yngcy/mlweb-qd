@@ -16,8 +16,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ScmsAirfoilCoordinateMapper extends BaseMapper<ScmsAirfoilCoordinate> {
 
-    @DataPermission(clAlias = "c", clIdColumnName = "security", userAlias = "u")
+    @DataPermission(clAlias = "c", clIdColumnName = "security", userAlias = "c")
     Page<AirfoilCoordinateBO> getAirfoilCoordinatePage(Page<AirfoilCoordinateBO> airfoilCoordinateBOPage);
+
+    @DataPermission(clIdColumnName = "security")
+    ScmsAirfoilCoordinate getCoordinateByAirfoilId(Long airfoilId);
 }
 
 

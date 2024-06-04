@@ -65,7 +65,7 @@ public class ScmsEngineTypeServiceImpl extends ServiceImpl<ScmsEngineTypeMapper,
         }
 
         ScmsEngineType engineType = scmsEngineTypeConverter.form2Entity(engineTypeForm);
-        boolean result = this.save(engineType);
+        boolean result = this.saveOrUpdate(engineType);
         return result;
     }
 

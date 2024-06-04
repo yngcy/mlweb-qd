@@ -48,7 +48,7 @@ public class ScmsWingflapLayoutServiceImpl extends ServiceImpl<ScmsWingflapLayou
         }
 
         ScmsWingflapLayout entity = scmsWingflapLayoutConverter.form2Entity(wingflapLayoutForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         return result;
     }
 

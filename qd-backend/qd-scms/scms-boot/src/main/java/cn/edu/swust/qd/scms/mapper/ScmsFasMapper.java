@@ -4,7 +4,9 @@ import cn.edu.swust.qd.common.mybatis.annotation.DataPermission;
 import cn.edu.swust.qd.scms.model.entity.ScmsFas;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface ScmsFasMapper extends BaseMapper<ScmsFas> {
 
     @DataPermission(clIdColumnName = "security")
     @Override
-    List<ScmsFas> selectList(Wrapper<ScmsFas> queryWrapper);
+    List<ScmsFas> selectList(@Param(Constants.WRAPPER) Wrapper<ScmsFas> queryWrapper);
 }
 
 

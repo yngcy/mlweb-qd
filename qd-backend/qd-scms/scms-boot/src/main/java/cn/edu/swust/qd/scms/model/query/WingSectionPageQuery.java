@@ -11,19 +11,19 @@ public class WingSectionPageQuery extends BasePageQuery {
     @Schema(description = "翼型ID")
     private Long airfoilId;
 
-    @Schema(description = "翼型截面编号")
-    private Long sectionNumber;
-
-    @Schema(description = "翼型截面位置")
-    private String sectionLocation;
-
-    @Schema(description = "翼型比例")
-    private Double wingProportion;
-
-    @Schema(description = "翼舵构型")
-    private String wingflapConfig;
-
-    @Schema(description = "描述")
-    private String description;
+//    @Schema(description = "翼型截面编号")
+//    private Long sectionNumber;
+//
+//    @Schema(description = "翼型截面位置")
+//    private String sectionLocation;
+//
+//    @Schema(description = "翼型比例")
+//    private Double wingProportion;
+//
+//    @Schema(description = "翼舵构型")
+//    private String wingflapConfig;
+//
+//    @Schema(description = "描述")
+//    private String description;
 
 }

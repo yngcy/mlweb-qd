@@ -66,7 +66,7 @@ public class ScmsAircraftSubServiceImpl extends ServiceImpl<ScmsAircraftSubMappe
         }
 
         ScmsAircraftSub aircraftSub = scmsAircraftSubConverter.form2Entity(aircraftSubForm);
-        boolean result = this.save(aircraftSub);
+        boolean result = this.saveOrUpdate(aircraftSub);
 
         return result;
     }

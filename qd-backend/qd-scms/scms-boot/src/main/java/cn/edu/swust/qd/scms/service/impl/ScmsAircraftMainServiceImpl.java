@@ -11,6 +11,7 @@ import cn.edu.swust.qd.scms.service.ScmsAircraftMainService;
 import cn.edu.swust.qd.scms.service.ScmsAircraftSecService;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -44,57 +45,6 @@ public class ScmsAircraftMainServiceImpl extends ServiceImpl<ScmsAircraftMainMap
         return page;
     }
 
-    //    @Deprecated
-//    private QueryWrapper<ScmsAircraftMain> getQueryWrapper(AircraftMainPageQuery queryParams) {
-//        QueryWrapper<ScmsAircraftMain> queryWrapper = new QueryWrapper<>();
-//        if (queryParams == null) {
-//            return queryWrapper;
-//        }
-//
-//        Long vehiTypeId = queryParams.getVehiTypeId();
-//        Long fuelTypeId = queryParams.getFuelTypeId();
-//        Long vehiId = queryParams.getVehiId();
-//        String vehiName = queryParams.getVehiName();
-//        String designDepartment = queryParams.getDesignDepartment();
-//        String designPerson = queryParams.getDesignPerson();
-//        Date designDate = queryParams.getDesignDate();
-//        Long engineTypeId = queryParams.getEngineTypeId();
-//        Long moduleNum = queryParams.getModuleNum();
-//        String launchPlatform = queryParams.getLaunchPlatform();
-//        Long stagesLv = queryParams.getStagesLv();
-//        String machTurn = queryParams.getMachTurn();
-//        String altiTurn = queryParams.getAltiTurn();
-//        String machCruise = queryParams.getMachCruise();
-//        String altiCruise = queryParams.getAltiCruise();
-//        String machDive = queryParams.getMachDive();
-//        String altiDive = queryParams.getAltiDive();
-//        String range = queryParams.getRange();
-//        Long createUser = queryParams.getCreateUser();
-//
-//        // 拼接查询条件
-//        queryWrapper.like(StrUtil.isNotBlank(vehiName), "vehi_name", vehiName);
-//        queryWrapper.like(StrUtil.isNotBlank(designDepartment), "design_department", designDepartment);
-//        queryWrapper.like(StrUtil.isNotBlank(designPerson), "design_person", designPerson);
-//        queryWrapper.like(StrUtil.isNotBlank(launchPlatform), "launch_platform", launchPlatform);
-//        queryWrapper.like(StrUtil.isNotBlank(machTurn), "mach_turn", machTurn);
-//        queryWrapper.like(StrUtil.isNotBlank(altiTurn), "alti_turn", altiTurn);
-//        queryWrapper.like(StrUtil.isNotBlank(machCruise), "mach_cruise", machCruise);
-//        queryWrapper.like(StrUtil.isNotBlank(altiCruise), "alti_cruise", altiCruise);
-//        queryWrapper.like(StrUtil.isNotBlank(machDive), "mach_dive", machDive);
-//        queryWrapper.like(StrUtil.isNotBlank(altiDive), "alti_dive", altiDive);
-//        queryWrapper.like(StrUtil.isNotBlank(range), "range", range);
-//
-//        queryWrapper.eq(ObjectUtil.isNotEmpty(vehiTypeId), "vehi_type_id", vehiTypeId);
-//        queryWrapper.eq(ObjectUtil.isNotEmpty(fuelTypeId), "fuel_type_id", fuelTypeId);
-//        queryWrapper.eq(ObjectUtil.isNotEmpty(vehiId), "vehi_id", vehiId);
-//        queryWrapper.eq(ObjectUtil.isNotEmpty(engineTypeId), "engine_type_id", engineTypeId);
-//        queryWrapper.eq(ObjectUtil.isNotEmpty(moduleNum), "moduleNum", moduleNum);
-//        queryWrapper.eq(ObjectUtil.isNotEmpty(stagesLv), "stages_lv", stagesLv);
-//        queryWrapper.eq(ObjectUtil.isNotEmpty(createUser), "create_user", createUser);
-//        queryWrapper.ge(ObjectUtil.isNotEmpty(designDate), "design_date", designDate);
-//
-//        return queryWrapper;
-//    }
     @Override
     public boolean saveAircraftMain(AircraftMainForm aircraftMainForm) {
         Long aircraftMainId = aircraftMainForm.getId();
@@ -109,7 +59,7 @@ public class ScmsAircraftMainServiceImpl extends ServiceImpl<ScmsAircraftMainMap
 
         // 实体转换
         ScmsAircraftMain entity = scmsaircraftMainConverter.form2Entity(aircraftMainForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
 
         return result;
     }
@@ -147,6 +97,14 @@ public class ScmsAircraftMainServiceImpl extends ServiceImpl<ScmsAircraftMainMap
     @Override
     public boolean isVehiTypeReferenced(Long vehiTypeId) {
         return this.count(new LambdaQueryWrapper<ScmsAircraftMain>().eq(ScmsAircraftMain::getVehiTypeId, vehiTypeId)) > 0;
+    }
+
+    @Override
+    public boolean updateSecurity(Long aircraftMainId, Integer security) {
+        return this.update(new LambdaUpdateWrapper<ScmsAircraftMain>()
+                .eq(ScmsAircraftMain::getId, aircraftMainId)
+                .set(ScmsAircraftMain::getSecurity, security)
+        );
     }
 }
 

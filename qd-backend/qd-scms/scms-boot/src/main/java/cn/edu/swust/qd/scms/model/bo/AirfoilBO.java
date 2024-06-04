@@ -1,35 +1,39 @@
 package cn.edu.swust.qd.scms.model.bo;
 
 import cn.edu.swust.qd.common.base.BaseEntity;
+import cn.edu.swust.qd.scms.model.entity.ScmsAirfoilCoordinate;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * 翼型坐标业务对象
+ * 翼型信息表
+ *
+ * @TableName scms_airfoil
  */
 @Data
-public class AirfoilCoordinateBO extends BaseEntity implements Serializable {
+public class AirfoilBO extends BaseEntity implements Serializable {
     /**
      * id
      */
     private Long id;
 
     /**
-     * 翼型表面标识
+     * 翼型类型
      */
-    private Integer surfaceIdent;
+    private String airfoilType;
 
     /**
-     * 沿弦向x值
+     * 翼型名称
      */
-    private Double alongStringX;
+    private String name;
 
     /**
-     * 翼型表面y值
+     * 备注
      */
-    private Double airfoilFaceY;
+    private String remark;
 
     /**
      * 自定密级
@@ -45,6 +49,11 @@ public class AirfoilCoordinateBO extends BaseEntity implements Serializable {
      * 更新用户id
      */
     private Long updateUser;
+
+    /**
+     * 翼型坐标
+     */
+    List<ScmsAirfoilCoordinate> coordinates;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

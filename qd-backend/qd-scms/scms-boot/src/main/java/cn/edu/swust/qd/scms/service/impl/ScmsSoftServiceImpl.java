@@ -57,7 +57,7 @@ public class ScmsSoftServiceImpl extends ServiceImpl<ScmsSoftMapper, ScmsSoft>
         }
 
         ScmsSoft entity = scmsSoftConverter.form2Entity(softForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         return result;
     }
 

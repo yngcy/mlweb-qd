@@ -1,6 +1,7 @@
 package cn.edu.swust.qd.scms.converter;
 
 import cn.edu.swust.qd.common.web.model.Option;
+import cn.edu.swust.qd.scms.model.bo.CompanyBO;
 import cn.edu.swust.qd.scms.model.entity.ScmsCompany;
 import cn.edu.swust.qd.scms.model.form.CompanyForm;
 import cn.edu.swust.qd.scms.model.vo.CompanyPageVO;
@@ -37,4 +38,11 @@ public interface ScmsCompanyConverter {
     ScmsCompany form2Entity(CompanyForm form);
 
     CompanyForm entity2Form(ScmsCompany entity);
+
+    @Mappings({
+            @Mapping(target = "security", expression = "java(cn.edu.swust.qd.common.base.IBaseEnum.getLabelByValue(companyBO.getSecurity(), cn.edu.swust.qd.common.enums.CLEnum.class))")
+    })
+    CompanyPageVO bo2VO(CompanyBO companyBO);
+
+    Page<CompanyPageVO> bo2VO(Page<CompanyBO> companyPage);
 }

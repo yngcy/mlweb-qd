@@ -9,6 +9,7 @@ import cn.edu.swust.qd.scms.model.vo.AircraftSecPageVO;
 import cn.edu.swust.qd.scms.service.ScmsAircraftSecService;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +51,7 @@ public class ScmsAircraftSecServiceImpl extends ServiceImpl<ScmsAircraftSecMappe
         }
 
         ScmsAircraftSec scmsAircraftSec = scmsAircraftSecConverter.form2Entity(aircraftSecForm);
-        boolean result = this.save(scmsAircraftSec);
+        boolean result = this.saveOrUpdate(scmsAircraftSec);
 
         return result;
     }
@@ -83,6 +84,14 @@ public class ScmsAircraftSecServiceImpl extends ServiceImpl<ScmsAircraftSecMappe
     @Override
     public boolean isSubReferenced(Long asId) {
         return this.count(new QueryWrapper<ScmsAircraftSec>().eq("id", asId)) > 0;
+    }
+
+    @Override
+    public boolean updateSecurity(Long aircraftSecId, Integer security) {
+        return this.update(new LambdaUpdateWrapper<ScmsAircraftSec>()
+                .eq(ScmsAircraftSec::getId, aircraftSecId)
+                .set(ScmsAircraftSec::getSecurity, security)
+        );
     }
 }
 

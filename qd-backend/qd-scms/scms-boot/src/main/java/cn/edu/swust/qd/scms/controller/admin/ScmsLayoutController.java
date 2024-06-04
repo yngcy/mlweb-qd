@@ -435,8 +435,8 @@ public class ScmsLayoutController {
     }
 
     @Operation(summary = "原型类型分页列表")
-    @GetMapping("/prototypes/page")
-    public PageResult<PrototypeTypePageVO> getPrototypePage(
+    @GetMapping("/prototype_types/page")
+    public PageResult<PrototypeTypePageVO> getPrototypeTypePage(
             @ParameterObject PrototypeTypePageQuery queryParams
     ) {
         Page<PrototypeTypePageVO> result = prototypeTypeService.getPrototypeTypePage(queryParams);
@@ -444,23 +444,23 @@ public class ScmsLayoutController {
     }
 
     @Operation(summary = "原型类型下拉列表")
-    @GetMapping("/prototypes/options")
-    public Result<List<Option>> getPrototypeOptions() {
+    @GetMapping("/prototype_types/options")
+    public Result<List<Option>> getPrototypeTypeOptions() {
         List<Option> list = prototypeTypeService.getPrototypeTypeOptions();
         return Result.success(list);
     }
 
     @Operation(summary = "新增原型类型")
-    @PostMapping("/prototypes")
-    @PreAuthorize("@ss.hasPerm('scms:prototype:add')")
+    @PostMapping("/prototype_types")
+    @PreAuthorize("@ss.hasPerm('scms:prototype_type:add')")
     @PreventDuplicateResubmit
-    public Result addPrototype(@Valid @RequestBody PrototypeTypeForm prototypeTypeForm) {
+    public Result addPrototypeType(@Valid @RequestBody PrototypeTypeForm prototypeTypeForm) {
         boolean result = prototypeTypeService.savePrototypeType(prototypeTypeForm);
         return Result.judge(result);
     }
 
     @Operation(summary = "原型类型表单")
-    @GetMapping("/prototypes/{prototypeTypeId}/form")
+    @GetMapping("/prototype_types/{prototypeTypeId}/form")
     public Result<PrototypeTypeForm> getPrototypeForm(
             @Parameter(description = "原型类型ID") @PathVariable Long prototypeTypeId
     ) {
@@ -469,17 +469,17 @@ public class ScmsLayoutController {
     }
 
     @Operation(summary = "修改原型类型")
-    @PutMapping("/prototypes/{prototypeTypeId}")
-    @PreAuthorize("@ss.hasPerm('scms:prototype:edit')")
-    public Result updatePrototype(@Valid @RequestBody PrototypeTypeForm prototypeTypeForm) {
+    @PutMapping("/prototype_types/{prototypeTypeId}")
+    @PreAuthorize("@ss.hasPerm('scms:prototype_type:edit')")
+    public Result updatePrototypeType(@Valid @RequestBody PrototypeTypeForm prototypeTypeForm) {
         boolean result = prototypeTypeService.savePrototypeType(prototypeTypeForm);
         return Result.judge(result);
     }
 
     @Operation(summary = "删除原型类型")
-    @DeleteMapping("/prototypes/{ids}")
-    @PreAuthorize("@ss.hasPerm('scms:prototype:delete')")
-    public Result deletePrototypes(
+    @DeleteMapping("/prototype_types/{ids}")
+    @PreAuthorize("@ss.hasPerm('scms:prototype_type:delete')")
+    public Result deletePrototypeTypes(
             @Parameter(description = "原型类型ID，多个以英文逗号(,)分割") @PathVariable String ids
     ) {
         boolean result = prototypeTypeService.deletePrototypeTypes(ids);
@@ -487,7 +487,7 @@ public class ScmsLayoutController {
     }
 
     @Operation(summary = "翼型类型分页列表")
-    @GetMapping("/airfiol_types/page")
+    @GetMapping("/airfoil_types/page")
     public PageResult<AirfoilTypePageVO> getAirfoilTypePage(
             @ParameterObject AirfoilTypePageQuery queryParams
     ) {
@@ -496,14 +496,14 @@ public class ScmsLayoutController {
     }
 
     @Operation(summary = "翼型类型下拉列表")
-    @GetMapping("/airfiol_types/options")
+    @GetMapping("/airfoil_types/options")
     public Result<List<Option>> getAirfoilTypeOptions() {
         List<Option> list = airfoilTypeService.getAirfoilTypeOptions();
         return Result.success(list);
     }
 
     @Operation(summary = "新增翼型类型")
-    @PostMapping("/airfiol_types")
+    @PostMapping("/airfoil_types")
     @PreAuthorize("@ss.hasPerm('scms:airfoil_type:add')")
     @PreventDuplicateResubmit
     public Result addAirfoilType(@Valid @RequestBody AirfoilTypeForm airfoilTypeForm) {
@@ -512,7 +512,7 @@ public class ScmsLayoutController {
     }
 
     @Operation(summary = "翼型类型表单")
-    @GetMapping("/airfiol_types/{airfoilTypeId}/form")
+    @GetMapping("/airfoil_types/{airfoilTypeId}/form")
     public Result<AirfoilTypeForm> getAirfoilTypeForm(
             @Parameter(description = "翼型类型ID") @PathVariable Long airfoilTypeId
     ) {
@@ -521,7 +521,7 @@ public class ScmsLayoutController {
     }
 
     @Operation(summary = "修改翼型类型")
-    @PutMapping("/airfiol_types/{airfoilTypeId}")
+    @PutMapping("/airfoil_types/{airfoilTypeId}")
     @PreAuthorize("@ss.hasPerm('scms:airfoil_type:edit')")
     public Result updateAirfoilType(@Valid @RequestBody AirfoilTypeForm airfoilTypeForm) {
         boolean result = airfoilTypeService.saveAirfoilType(airfoilTypeForm);
@@ -529,7 +529,7 @@ public class ScmsLayoutController {
     }
 
     @Operation(summary = "删除翼型类型")
-    @DeleteMapping("/airfiol_types/{ids}")
+    @DeleteMapping("/airfoil_types/{ids}")
     @PreAuthorize("@ss.hasPerm('scms:airfoil_type:delete')")
     public Result deleteAirfoilTypes(
             @Parameter(description = "翼型类型ID，多个以英文逗号(,)分割") @PathVariable String ids
@@ -537,4 +537,5 @@ public class ScmsLayoutController {
         boolean result = airfoilTypeService.deleteAirfoilTypes(ids);
         return Result.judge(result);
     }
+    
 }

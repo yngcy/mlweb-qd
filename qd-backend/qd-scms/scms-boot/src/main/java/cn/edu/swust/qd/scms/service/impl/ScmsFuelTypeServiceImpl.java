@@ -62,7 +62,7 @@ public class ScmsFuelTypeServiceImpl extends ServiceImpl<ScmsFuelTypeMapper, Scm
         }
 
         ScmsFuelType fuelType = scmsFuelTypeConverter.form2Entity(fuelTypeForm);
-        boolean result = this.save(fuelType);
+        boolean result = this.saveOrUpdate(fuelType);
 
         return result;
     }

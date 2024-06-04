@@ -80,6 +80,17 @@ public class ScmsFlightController {
         return Result.judge(result);
     }
 
+    @Operation(summary = "修改飞行器主信息密级")
+    @PutMapping(value = "/{aircraftMainId}/security")
+    @PreAuthorize("@ss.hasPerm('scms:aircraft_main:security')")
+    public Result updateAircraftMainSecurity(
+            @Parameter(description = "飞行器主信息ID") @PathVariable Long aircraftMainId,
+            @Parameter(description = "数据密级") @RequestParam Integer security
+    ) {
+        boolean result = aircraftMainService.updateSecurity(aircraftMainId, security);
+        return Result.judge(result);
+    }
+
     @Operation(summary = "飞行器次级信息分页列表")
     @GetMapping("/aircraft_secs/page")
     public PageResult<AircraftSecPageVO> getAircraftSecPage(
@@ -122,6 +133,17 @@ public class ScmsFlightController {
             @Parameter(description = "飞行器次级信息ID，多个以英文逗号(,)分隔") @PathVariable String ids
     ) {
         boolean result = aircraftSecService.deleteAircraftSecs(ids);
+        return Result.judge(result);
+    }
+
+    @Operation(summary = "修改飞行器次级信息密级")
+    @PutMapping(value = "/{aircraftSecId}/security")
+    @PreAuthorize("@ss.hasPerm('scms:aircraft_sec:security')")
+    public Result updateAircraftSecSecurity(
+            @Parameter(description = "飞行器次级信息ID") @PathVariable Long aircraftSecId,
+            @Parameter(description = "数据密级") @RequestParam Integer security
+    ) {
+        boolean result = aircraftSecService.updateSecurity(aircraftSecId, security);
         return Result.judge(result);
     }
 }

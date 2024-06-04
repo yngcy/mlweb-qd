@@ -58,7 +58,7 @@ public class ScmsPrototypeTypeServiceImpl extends ServiceImpl<ScmsPrototypeTypeM
         }
 
         ScmsPrototypeType entity = scmsPrototypeTypeConverter.form2Entity(prototypeTypeForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
 
         return result;
     }

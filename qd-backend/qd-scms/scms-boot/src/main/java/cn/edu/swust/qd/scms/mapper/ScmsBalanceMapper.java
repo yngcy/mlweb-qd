@@ -19,6 +19,7 @@ public interface ScmsBalanceMapper extends BaseMapper<ScmsBalance> {
 
     @DataPermission(clAlias = "b", clIdColumnName = "security", userAlias = "b")
     Page<BalanceBO> getBalancePage(Page<BalanceBO> balanceBOPage);
+
 }
 
 

@@ -51,6 +51,7 @@ public class ScmsBalance extends BaseEntity implements Serializable {
     /**
      * 天平设计载荷（kn）
      */
+    @TableField(value = "`load`")
     private String load;
 
     /**

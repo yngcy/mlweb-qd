@@ -52,7 +52,7 @@ public class ScmsWingflapConfigServiceImpl extends ServiceImpl<ScmsWingflapConfi
         }
 
         ScmsWingflapConfig entity = scmsWingflapConfigConverter.form2Entity(wingflapConfigForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         return result;
     }
 

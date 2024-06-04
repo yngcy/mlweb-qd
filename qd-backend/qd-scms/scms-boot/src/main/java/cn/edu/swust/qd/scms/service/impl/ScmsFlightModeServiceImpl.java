@@ -57,7 +57,7 @@ public class ScmsFlightModeServiceImpl extends ServiceImpl<ScmsFlightModeMapper,
         }
 
         ScmsFlightMode flightMode = scmsFlightModeConverter.form2Entity(flightModeForm);
-        boolean result = this.save(flightMode);
+        boolean result = this.saveOrUpdate(flightMode);
 
         return result;
     }

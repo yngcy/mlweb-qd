@@ -3,7 +3,10 @@ package cn.edu.swust.qd.scms.model.form;
 import cn.edu.swust.qd.common.base.BaseQdDataForm;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * 翼型信息表
@@ -15,7 +18,7 @@ import lombok.Data;
 public class AirfoilForm extends BaseQdDataForm {
 
     @Schema(description = "翼型类型ID")
-    @NotBlank(message = "翼型类型不能为空")
+    @NotNull(message = "翼型类型不能为空")
     private Long airfoilTypeId;
 
     @Schema(description = "翼型名称")
@@ -24,5 +27,8 @@ public class AirfoilForm extends BaseQdDataForm {
 
     @Schema(description = "备注")
     private String remark;
+
+    @Schema(description = "翼型坐标")
+    private List<AirfoilCoordinateForm> coordinateFormList;
 
 }

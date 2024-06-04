@@ -16,9 +16,48 @@
         <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
     </resultMap>
 
+    <resultMap id="PageResultMap" type="cn.edu.swust.qd.scms.model.bo.AirfoilBO">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="airfoilType" column="airfoil_type" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="security" column="security" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+        <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+        <collection property="coordinates" column="id"
+                    select="cn.edu.swust.qd.scms.mapper.ScmsAirfoilCoordinateMapper.getCoordinateByAirfoilId">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="surfaceIdent" column="surface_ident" jdbcType="INTEGER"/>
+            <result property="alongStringX" column="along_string_x" jdbcType="DOUBLE"/>
+            <result property="airfoilFaceY" column="airfoil_face_y" jdbcType="DOUBLE"/>
+            <result property="airfoilId" column="airfoil_id" jdbcType="BIGINT"/>
+            <result property="security" column="security" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+            <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+        </collection>
+    </resultMap>
+
     <sql id="Base_Column_List">
         id,airfoil_type_id,name,
         remark,security,create_time,
         update_time,create_user,update_user
     </sql>
+    <select id="getAirfoilPage" resultMap="PageResultMap">
+        SELECT t1.id,
+               t2.name AS airfoil_type,
+               t1.name,
+               t1.remark,
+               t1.security,
+               t1.create_time,
+               t1.update_time,
+               t1.create_user,
+               t1.update_user
+        FROM scms_airfoil t1
+                 LEFT JOIN scms_airfoil_type t2 ON t1.airfoil_type_id = t2.id AND t1.airfoil_type_id != 0
+        GROUP BY t1.id;
+    </select>
 </mapper>

@@ -4,7 +4,9 @@ import cn.edu.swust.qd.common.mybatis.annotation.DataPermission;
 import cn.edu.swust.qd.scms.model.entity.ScmsBalanceType;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface ScmsBalanceTypeMapper extends BaseMapper<ScmsBalanceType> {
 
     @DataPermission(clIdColumnName = "security")
     @Override
-    List<ScmsBalanceType> selectList(Wrapper<ScmsBalanceType> queryWrapper);
+    List<ScmsBalanceType> selectList(@Param(Constants.WRAPPER) Wrapper<ScmsBalanceType> queryWrapper);
 }
 
 

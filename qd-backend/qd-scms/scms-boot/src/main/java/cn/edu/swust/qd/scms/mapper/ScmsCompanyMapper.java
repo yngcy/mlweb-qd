@@ -1,12 +1,11 @@
 package cn.edu.swust.qd.scms.mapper;
 
 import cn.edu.swust.qd.common.mybatis.annotation.DataPermission;
+import cn.edu.swust.qd.scms.model.bo.CompanyBO;
 import cn.edu.swust.qd.scms.model.entity.ScmsCompany;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 
 /**
  * @author 25055
@@ -17,9 +16,9 @@ import java.util.List;
 @Mapper
 public interface ScmsCompanyMapper extends BaseMapper<ScmsCompany> {
 
-    @DataPermission(clIdColumnName = "security")
-    @Override
-    List<ScmsCompany> selectList(Wrapper<ScmsCompany> queryWrapper);
+
+    @DataPermission(clAlias = "c", clIdColumnName = "security", userAlias = "c")
+    Page<CompanyBO> getCompanyPage(Page<CompanyBO> companyBOPage);
 }
 
 

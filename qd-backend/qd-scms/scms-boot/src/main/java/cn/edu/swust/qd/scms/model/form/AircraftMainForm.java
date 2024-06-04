@@ -3,6 +3,7 @@ package cn.edu.swust.qd.scms.model.form;
 import cn.edu.swust.qd.common.base.BaseQdDataForm;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.Date;
@@ -18,7 +19,7 @@ public class AircraftMainForm extends BaseQdDataForm {
     private Long fuelTypeId;
 
     @Schema(description = "飞行器ID")
-    @NotBlank(message = "飞行器ID不能为空")
+    @NotNull(message = "飞行器ID不能为空")
     private Long vehiId;
 
     @Schema(description = "飞行器名称")

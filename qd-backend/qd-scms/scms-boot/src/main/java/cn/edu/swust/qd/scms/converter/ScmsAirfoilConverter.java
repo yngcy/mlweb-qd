@@ -1,6 +1,7 @@
 package cn.edu.swust.qd.scms.converter;
 
 import cn.edu.swust.qd.common.web.model.Option;
+import cn.edu.swust.qd.scms.model.bo.AirfoilBO;
 import cn.edu.swust.qd.scms.model.entity.ScmsAirfoil;
 import cn.edu.swust.qd.scms.model.form.AirfoilForm;
 import cn.edu.swust.qd.scms.model.vo.AirfoilPageVO;
@@ -35,4 +36,11 @@ public interface ScmsAirfoilConverter {
     AirfoilForm entity2Form(ScmsAirfoil entity);
 
     ScmsAirfoil form2Entity(AirfoilForm form);
+
+    @Mappings({
+            @Mapping(target = "security", expression = "java(cn.edu.swust.qd.common.base.IBaseEnum.getLabelByValue(bo.getSecurity(), cn.edu.swust.qd.common.enums.CLEnum.class))")
+    })
+    AirfoilPageVO bo2VO(AirfoilBO bo);
+
+    Page<AirfoilPageVO> bo2VO(Page<AirfoilBO> airfoilPage);
 }

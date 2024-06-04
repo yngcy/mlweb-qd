@@ -3,6 +3,7 @@ package cn.edu.swust.qd.scms.model.form;
 import cn.edu.swust.qd.common.base.BaseQdDataForm;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Schema(description = "翼舵布局表单")
@@ -18,7 +19,7 @@ public class WingflapLayoutForm extends BaseQdDataForm {
     private String type;
 
     @Schema(description = "翼舵数目")
-    @NotBlank(message = "翼舵数目不能为空")
+    @NotNull(message = "翼舵数目不能为空")
     private Integer wingflapNum;
 
     @Schema(description = "固定气动面数")

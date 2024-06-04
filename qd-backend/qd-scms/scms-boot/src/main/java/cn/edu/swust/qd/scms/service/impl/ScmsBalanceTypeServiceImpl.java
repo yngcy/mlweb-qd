@@ -64,7 +64,7 @@ public class ScmsBalanceTypeServiceImpl extends ServiceImpl<ScmsBalanceTypeMappe
         }
 
         ScmsBalanceType balanceType = scmsBalanceTypeConverter.form2Entity(balanceTypeForm);
-        boolean result = this.save(balanceType);
+        boolean result = this.saveOrUpdate(balanceType);
         return result;
     }
 

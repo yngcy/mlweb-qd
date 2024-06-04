@@ -39,6 +39,9 @@ public interface ScmsBalanceConverter {
 
     BalanceForm entity2Form(ScmsBalance entity);
 
+    @Mappings({
+            @Mapping(target = "security", expression = "java(cn.edu.swust.qd.common.base.IBaseEnum.getLabelByValue(balanceBO.getSecurity(), cn.edu.swust.qd.common.enums.CLEnum.class))")
+    })
     BalancePageVO bo2VO(BalanceBO balanceBO);
 
     Page<BalancePageVO> bo2VO(Page<BalanceBO> balancePage);

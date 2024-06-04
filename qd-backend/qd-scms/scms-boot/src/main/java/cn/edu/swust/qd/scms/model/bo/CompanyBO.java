@@ -7,29 +7,39 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 翼型坐标业务对象
+ * 研究机构业务对象
  */
 @Data
-public class AirfoilCoordinateBO extends BaseEntity implements Serializable {
+public class CompanyBO extends BaseEntity implements Serializable {
     /**
      * id
      */
     private Long id;
 
     /**
-     * 翼型表面标识
+     * 单位编码
      */
-    private Integer surfaceIdent;
+    private String code;
 
     /**
-     * 沿弦向x值
+     * 单位名称
      */
-    private Double alongStringX;
+    private String name;
 
     /**
-     * 翼型表面y值
+     * 单位地址
      */
-    private Double airfoilFaceY;
+    private String address;
+
+    /**
+     * 联系电话
+     */
+    private String telephone;
+
+    /**
+     * 所属机构
+     */
+    private String parent;
 
     /**
      * 自定密级

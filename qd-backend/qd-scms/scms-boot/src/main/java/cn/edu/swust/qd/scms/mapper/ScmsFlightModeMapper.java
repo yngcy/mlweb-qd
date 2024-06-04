@@ -4,7 +4,9 @@ import cn.edu.swust.qd.common.mybatis.annotation.DataPermission;
 import cn.edu.swust.qd.scms.model.entity.ScmsFlightMode;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface ScmsFlightModeMapper extends BaseMapper<ScmsFlightMode> {
 
     @DataPermission(clIdColumnName = "security")
     @Override
-    List<ScmsFlightMode> selectList(Wrapper<ScmsFlightMode> queryWrapper);
+    List<ScmsFlightMode> selectList(@Param(Constants.WRAPPER) Wrapper<ScmsFlightMode> queryWrapper);
 }
 
 

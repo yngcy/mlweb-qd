@@ -3,12 +3,15 @@ package cn.edu.swust.qd.scms.service.impl;
 import cn.edu.swust.qd.common.web.model.Option;
 import cn.edu.swust.qd.scms.converter.ScmsAirfoilConverter;
 import cn.edu.swust.qd.scms.mapper.ScmsAirfoilMapper;
+import cn.edu.swust.qd.scms.model.bo.AirfoilBO;
 import cn.edu.swust.qd.scms.model.entity.ScmsAirfoil;
+import cn.edu.swust.qd.scms.model.form.AirfoilCoordinateForm;
 import cn.edu.swust.qd.scms.model.form.AirfoilForm;
 import cn.edu.swust.qd.scms.model.query.AirfoilPageQuery;
 import cn.edu.swust.qd.scms.model.vo.AirfoilPageVO;
 import cn.edu.swust.qd.scms.service.ScmsAirfoilCoordinateService;
 import cn.edu.swust.qd.scms.service.ScmsAirfoilService;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -16,6 +19,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,13 +47,14 @@ public class ScmsAirfoilServiceImpl extends ServiceImpl<ScmsAirfoilMapper, ScmsA
 
     @Override
     public Page<AirfoilPageVO> getAirfoilPage(AirfoilPageQuery queryParams) {
-        Page<ScmsAirfoil> airfoilPage = this.page(new Page<>(queryParams.getPageNum(), queryParams.getPageSize()));
-        Page<AirfoilPageVO> page = scmsAirfoilConverter.entity2VO(airfoilPage);
-        return page;
+        Page<AirfoilBO> airfoilPage = this.baseMapper.getAirfoilPage(
+                new Page<AirfoilBO>(queryParams.getPageNum(), queryParams.getPageSize()), queryParams);
+        return scmsAirfoilConverter.bo2VO(airfoilPage);
     }
 
 
     @Override
+    @Transactional
     public boolean saveAirfoil(AirfoilForm airfoilForm) {
         Long airfoilId = airfoilForm.getId();
         ScmsAirfoil oldAirfoil = null;
@@ -59,8 +64,10 @@ public class ScmsAirfoilServiceImpl extends ServiceImpl<ScmsAirfoilMapper, ScmsA
         }
 
         ScmsAirfoil airfoil = scmsAirfoilConverter.form2Entity(airfoilForm);
-        boolean result = this.save(airfoil);
-        return result;
+        boolean saveAirfoil = this.saveOrUpdate(airfoil);
+        List<AirfoilCoordinateForm> coordinateFormList = airfoilForm.getCoordinateFormList();
+        boolean saveCoord = CollUtil.isNotEmpty(coordinateFormList) ? scmsAirfoilCoordinateService.saveAirfoilCoordinates(coordinateFormList) : true;
+        return saveAirfoil && saveCoord;
     }
 
     @Override
@@ -73,7 +80,13 @@ public class ScmsAirfoilServiceImpl extends ServiceImpl<ScmsAirfoilMapper, ScmsA
     @Override
     public AirfoilForm getAirfoilForm(Long airfoilId) {
         ScmsAirfoil airfoil = this.getById(airfoilId);
-        return scmsAirfoilConverter.entity2Form(airfoil);
+
+        AirfoilForm result = scmsAirfoilConverter.entity2Form(airfoil);
+        // 获取翼型坐标
+        List<AirfoilCoordinateForm> coordinateFormList = scmsAirfoilCoordinateService.listAirfoilCoordinatesByAirfoilId(airfoilId);
+
+        result.setCoordinateFormList(coordinateFormList);
+        return result;
     }
 
     @Override

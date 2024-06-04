@@ -56,7 +56,7 @@ public class ScmsSupportModeServiceImpl extends ServiceImpl<ScmsSupportModeMappe
         }
 
         ScmsSupportMode entity = scmsSupportModeConverter.form2Entity(supportModeForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         return result;
     }
 

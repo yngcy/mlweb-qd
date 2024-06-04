@@ -104,6 +104,17 @@ public class ScmsCalculateController {
         return Result.judge(result);
     }
 
+    @Operation(summary = "修改坐标系类别密级")
+    @PutMapping(value = "/coordinate_types/{coordinateTypeId}/security")
+    @PreAuthorize("@ss.hasPerm('scms:coordinate_type:security')")
+    public Result updateCoordinateTypeSecurity(
+            @Parameter(description = "坐标系类别ID") @PathVariable Long coordinateTypeId,
+            @Parameter(description = "数据密级") @RequestParam Integer security
+    ) {
+        boolean result = coordinateTypeService.updateSecurity(coordinateTypeId, security);
+        return Result.judge(result);
+    }
+
     @Operation(summary = "坐标系统类别分页列表")
     @GetMapping("/coord_system_types/page")
     public PageResult<CoordSystemTypePageVO> getCoordSystemTypePage(
@@ -156,5 +167,15 @@ public class ScmsCalculateController {
         return Result.judge(result);
     }
 
+    @Operation(summary = "修改坐标系类别密级")
+    @PutMapping(value = "/coord_system_types/{coordSystemTypeId}/security")
+    @PreAuthorize("@ss.hasPerm('scms:coord_system_type:security')")
+    public Result updateCoordSystemTypeSecurity(
+            @Parameter(description = "坐标系统类别ID") @PathVariable Long coordSystemTypeId,
+            @Parameter(description = "数据密级") @RequestParam Integer security
+    ) {
+        boolean result = coordSystemTypeService.updateSecurity(coordSystemTypeId, security);
+        return Result.judge(result);
+    }
 
 }

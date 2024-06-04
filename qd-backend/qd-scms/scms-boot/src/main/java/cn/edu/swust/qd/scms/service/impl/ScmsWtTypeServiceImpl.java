@@ -66,7 +66,7 @@ public class ScmsWtTypeServiceImpl extends ServiceImpl<ScmsWtTypeMapper, ScmsWtT
         }
 
         ScmsWtType entity = scmsWtTypeConverter.form2Entity(wtTypeForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         return result;
     }
 

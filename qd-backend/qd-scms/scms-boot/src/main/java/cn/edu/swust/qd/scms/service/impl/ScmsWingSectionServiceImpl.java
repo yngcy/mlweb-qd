@@ -51,7 +51,7 @@ public class ScmsWingSectionServiceImpl extends ServiceImpl<ScmsWingSectionMappe
         }
 
         ScmsWingSection entity = scmsWingSectionConverter.form2Entity(wingSectionForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         return result;
     }
 

@@ -62,4 +62,13 @@ public interface ScmsAircraftMainService extends IService<ScmsAircraftMain> {
      * @return
      */
     boolean isVehiTypeReferenced(Long vehiTypeId);
+
+    /**
+     * 修改飞行器主信息数据密级
+     *
+     * @param aircraftMainId
+     * @param security
+     * @return
+     */
+    boolean updateSecurity(Long aircraftMainId, Integer security);
 }

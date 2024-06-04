@@ -65,7 +65,7 @@ public class ScmsVehiTypeServiceImpl extends ServiceImpl<ScmsVehiTypeMapper, Scm
         }
 
         ScmsVehiType entity = scmsVehiTypeConverter.form2Entity(vehiTypeForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         return result;
     }
 

@@ -2,7 +2,7 @@ package cn.edu.swust.qd.scms.model.form;
 
 import cn.edu.swust.qd.common.base.BaseQdDataForm;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -15,11 +15,11 @@ import lombok.Data;
 public class AircraftSecForm extends BaseQdDataForm {
 
     @Schema(description = "飞行器主信息ID")
-    @NotBlank(message = "飞行器主信息ID不能为空")
+    @NotNull(message = "飞行器主信息ID不能为空")
     private Long aircraftMainId;
 
     @Schema(description = "飞行器子级信息ID")
-    @NotBlank(message = "飞行器子级信息ID不能为空")
+    @NotNull(message = "飞行器子级信息ID不能为空")
     private Long aircraftSubId;
 
     @Schema(description = "飞行器子级长度（m）")

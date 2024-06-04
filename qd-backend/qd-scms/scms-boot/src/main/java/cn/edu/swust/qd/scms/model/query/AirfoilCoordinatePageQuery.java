@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class AirfoilCoordinatePageQuery extends BasePageQuery {
 
-//    @Schema(description = "翼型表面标识")
+    //    @Schema(description = "翼型表面标识")
 //    private Integer surfaceIdent;
 //
 //    @Schema(description = "沿弦向x值")
@@ -22,6 +22,6 @@ public class AirfoilCoordinatePageQuery extends BasePageQuery {
 //    @Schema(description = "翼型表面y值")
 //    private Double airfoilFaceY;
 //
-//    @Schema(description = "翼型ID")
-//    private Long airfoilId;
+    @Schema(description = "翼型ID")
+    private Long airfoilId;
 }

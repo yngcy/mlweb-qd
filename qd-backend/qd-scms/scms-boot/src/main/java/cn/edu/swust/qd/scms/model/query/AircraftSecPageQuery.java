@@ -8,8 +8,8 @@ import lombok.Data;
 @Data
 public class AircraftSecPageQuery extends BasePageQuery {
 
-//    @Schema(description = "飞行器主信息ID")
-//    private Long aircraftMainId;
+    @Schema(description = "飞行器主信息ID")
+    private Long aircraftMainId;
 //
 //    @Schema(description = "飞行器子级ID")
 //    private Long aircraftSubId;

@@ -10,6 +10,7 @@ import cn.edu.swust.qd.scms.model.vo.CoordinateTypePageVO;
 import cn.edu.swust.qd.scms.service.ScmsCoordinateTypeService;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -59,7 +60,7 @@ public class ScmsCoordinateTypeServiceImpl extends ServiceImpl<ScmsCoordinateTyp
         }
 
         ScmsCoordinateType coordinateType = scmsCoordinateTypeConverter.form2Entity(coordinateTypeForm);
-        boolean result = this.save(coordinateType);
+        boolean result = this.saveOrUpdate(coordinateType);
         return result;
     }
 
@@ -81,6 +82,14 @@ public class ScmsCoordinateTypeServiceImpl extends ServiceImpl<ScmsCoordinateTyp
             this.removeById(coordinateType);
         }
         return true;
+    }
+
+    @Override
+    public boolean updateSecurity(Long coordinateTypeId, Integer security) {
+        return this.update(new LambdaUpdateWrapper<ScmsCoordinateType>()
+                .eq(ScmsCoordinateType::getId, coordinateTypeId)
+                .set(ScmsCoordinateType::getSecurity, security)
+        );
     }
 }
 

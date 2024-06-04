@@ -57,7 +57,7 @@ public class ScmsInjModeServiceImpl extends ServiceImpl<ScmsInjModeMapper, ScmsI
         }
 
         ScmsInjMode entity = scmsInjModeConverter.form2Entity(injModeForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         return result;
     }
 

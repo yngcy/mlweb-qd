@@ -58,7 +58,7 @@ public class ScmsFasServiceImpl extends ServiceImpl<ScmsFasMapper, ScmsFas>
         }
 
         ScmsFas fas = scmsFasConverter.form2Entity(fasForm);
-        boolean result = this.save(fas);
+        boolean result = this.saveOrUpdate(fas);
 
         return result;
     }

@@ -24,4 +24,20 @@
         security,create_time,update_time,
         create_user,update_user
     </sql>
+    <select id="getCompanyPage" resultType="cn.edu.swust.qd.scms.model.bo.CompanyBO">
+        SELECT c.id,
+               c.code,
+               c.name,
+               c.address,
+               c.telephone,
+               p.name AS parent,
+               c.security,
+               c.create_time,
+               c.update_time,
+               c.create_user,
+               c.update_user
+        FROM scms_company c
+                 LEFT JOIN scms_company p ON c.parent_id = p.id AND c.parent_id != 0
+        GROUP BY c.id;
+    </select>
 </mapper>

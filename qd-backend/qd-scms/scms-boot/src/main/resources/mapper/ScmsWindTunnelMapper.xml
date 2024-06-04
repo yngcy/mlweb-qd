@@ -58,7 +58,7 @@
                w.create_user,
                w.update_user
         FROM scms_wind_tunnel w
-                 LEFT JOIN scms_wind_tunnel_type t ON w.wt_type_id = t.id
+                 LEFT JOIN scms_wt_type t ON w.wt_type_id = t.id
                  LEFT JOIN scms_company c ON w.company_id = c.id
         GROUP BY w.id;
     </select>

@@ -10,6 +10,7 @@ import cn.edu.swust.qd.scms.model.vo.CoordSystemTypePageVO;
 import cn.edu.swust.qd.scms.service.ScmsCoordSystemTypeService;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -59,7 +60,7 @@ public class ScmsCoordSystemTypeServiceImpl extends ServiceImpl<ScmsCoordSystemT
         }
 
         ScmsCoordSystemType coordSystemType = scmsCoordSystemTypeConverter.form2Entity(coordSystemTypeForm);
-        boolean result = this.save(coordSystemType);
+        boolean result = this.saveOrUpdate(coordSystemType);
         return result;
     }
 
@@ -83,6 +84,14 @@ public class ScmsCoordSystemTypeServiceImpl extends ServiceImpl<ScmsCoordSystemT
         }
 
         return true;
+    }
+
+    @Override
+    public boolean updateSecurity(Long coordSystemTypeId, Integer security) {
+        return this.update(new LambdaUpdateWrapper<ScmsCoordSystemType>()
+                .eq(ScmsCoordSystemType::getId, coordSystemTypeId)
+                .set(ScmsCoordSystemType::getSecurity, security)
+        );
     }
 }
 

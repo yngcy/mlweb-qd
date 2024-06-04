@@ -57,7 +57,7 @@ public class ScmsTrajectoryServiceImpl extends ServiceImpl<ScmsTrajectoryMapper,
         }
 
         ScmsTrajectory entity = scmsTrajectoryConverter.form2Entity(trajectoryForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         return result;
     }
 

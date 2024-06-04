@@ -51,7 +51,7 @@ public class ScmsWindTunnelServiceImpl extends ServiceImpl<ScmsWindTunnelMapper,
         }
 
         ScmsWindTunnel entity = scmsWindTunnelConverter.form2Entity(windTunnelForm);
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         return result;
     }
 

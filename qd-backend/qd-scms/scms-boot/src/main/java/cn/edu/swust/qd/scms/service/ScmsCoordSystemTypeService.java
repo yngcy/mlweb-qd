@@ -55,4 +55,13 @@ public interface ScmsCoordSystemTypeService extends IService<ScmsCoordSystemType
      * @return
      */
     boolean deleteCoordSystemTypes(String ids);
+
+    /**
+     * 修改坐标系系统类别数据密级
+     *
+     * @param coordSystemTypeId
+     * @param security
+     * @return
+     */
+    boolean updateSecurity(Long coordSystemTypeId, Integer security);
 }

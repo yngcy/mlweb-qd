@@ -6,12 +6,17 @@ import cn.edu.swust.qd.scms.model.query.AirfoilCoordinatePageQuery;
 import cn.edu.swust.qd.scms.model.vo.AirfoilCoordinatePageVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 /**
  * @author 25055
  * @description 针对表【scms_airfoil_coordinate(翼型坐标表)】的数据库操作Service
  * @createDate 2024-05-10 16:39:59
  */
+@Validated
 public interface ScmsAirfoilCoordinateService extends IService<ScmsAirfoilCoordinate> {
 
     /**
@@ -29,6 +34,8 @@ public interface ScmsAirfoilCoordinateService extends IService<ScmsAirfoilCoordi
      * @return
      */
     boolean saveAirfoilCoordinate(AirfoilCoordinateForm airfoilCoordinateForm);
+
+    boolean saveAirfoilCoordinates(@Valid List<AirfoilCoordinateForm> airfoilCoordinateForms);
 
     /**
      * 获取翼型坐标表单
@@ -53,4 +60,12 @@ public interface ScmsAirfoilCoordinateService extends IService<ScmsAirfoilCoordi
      * @return 不为空返回 true，否则 false
      */
     boolean hasAirfoilCoordinate(Long airfoilId);
+
+    /**
+     * 获取翼型下的所有翼型坐标
+     *
+     * @param airfoilId
+     * @return
+     */
+    List<AirfoilCoordinateForm> listAirfoilCoordinatesByAirfoilId(Long airfoilId);
 }
