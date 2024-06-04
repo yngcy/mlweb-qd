@@ -1,7 +1,7 @@
 package cn.edu.swust.qd.common.base;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serial;
@@ -22,7 +22,6 @@ public class BaseQdDataForm implements Serializable {
     private Long id;
 
     @Schema(description = "自定密级")
-    @NotBlank(message = "自定密级不能为空")
+    @NotNull(message = "自定密级不能为空")
     private Integer security;
-
 }
