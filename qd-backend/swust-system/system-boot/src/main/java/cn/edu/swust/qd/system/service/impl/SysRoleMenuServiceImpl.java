@@ -2,7 +2,6 @@ package cn.edu.swust.qd.system.service.impl;
 
 import cn.edu.swust.qd.common.constant.RedisConstants;
 import cn.edu.swust.qd.system.mapper.SysRoleMenuMapper;
-import cn.edu.swust.qd.system.model.dto.RolePermsDTO;
 import cn.edu.swust.qd.system.model.entity.SysRoleMenu;
 import cn.edu.swust.qd.system.service.SysRoleMenuService;
 import cn.hutool.core.collection.CollectionUtil;
@@ -41,7 +40,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         // 清理权限缓存
         redisTemplate.opsForHash().delete(RedisConstants.ROLE_PERMS_PREFIX, "*");
 
-        List<RolePermsDTO> list = this.baseMapper.getRolePermsList(null);
+        List<cn.edu.swust.qd.system.model.bo.RolePermsBO> list = this.baseMapper.getRolePermsList(null);
         if (CollectionUtil.isNotEmpty(list)) {
             list.forEach(item -> {
                 String roleCode = item.getRoleCode();
@@ -59,9 +58,9 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         // 清理权限缓存
         redisTemplate.opsForHash().delete(RedisConstants.ROLE_PERMS_PREFIX, roleCode);
 
-        List<RolePermsDTO> list = this.baseMapper.getRolePermsList(roleCode);
+        List<cn.edu.swust.qd.system.model.bo.RolePermsBO> list = this.baseMapper.getRolePermsList(roleCode);
         if (CollectionUtil.isNotEmpty(list)) {
-            RolePermsDTO rolePerms = list.get(0);
+            cn.edu.swust.qd.system.model.bo.RolePermsBO rolePerms = list.get(0);
             if (rolePerms == null) {
                 return;
             }
@@ -80,9 +79,9 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         redisTemplate.opsForHash().delete(RedisConstants.ROLE_PERMS_PREFIX, oldRoleCode);
 
         // 添加新角色权限缓存
-        List<RolePermsDTO> list = this.baseMapper.getRolePermsList(newRoleCode);
+        List<cn.edu.swust.qd.system.model.bo.RolePermsBO> list = this.baseMapper.getRolePermsList(newRoleCode);
         if (CollectionUtil.isNotEmpty(list)) {
-            RolePermsDTO rolePerms = list.get(0);
+            cn.edu.swust.qd.system.model.bo.RolePermsBO rolePerms = list.get(0);
             if (rolePerms == null) {
                 return;
             }

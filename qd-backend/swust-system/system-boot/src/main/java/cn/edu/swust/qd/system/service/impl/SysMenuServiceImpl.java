@@ -6,7 +6,7 @@ import cn.edu.swust.qd.common.web.model.Option;
 import cn.edu.swust.qd.system.converter.MenuConverter;
 import cn.edu.swust.qd.system.enums.MenuTypeEnum;
 import cn.edu.swust.qd.system.mapper.SysMenuMapper;
-import cn.edu.swust.qd.system.model.dto.RouteDTO;
+import cn.edu.swust.qd.system.model.bo.RouteBO;
 import cn.edu.swust.qd.system.model.entity.SysMenu;
 import cn.edu.swust.qd.system.model.form.MenuForm;
 import cn.edu.swust.qd.system.model.query.MenuQuery;
@@ -132,7 +132,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Override
     @Cacheable(cacheNames = "menu", key = "'routes'")
     public List<RouteVO> listRoutes() {
-        List<RouteDTO> menuList = this.baseMapper.listRoutes();
+        List<RouteBO> menuList = this.baseMapper.listRoutes();
         return buildRoutes(SystemConstants.ROOT_NODE_ID, menuList);
     }
 
@@ -143,10 +143,10 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * @param menuList 菜单列表
      * @return 路由层级列表
      */
-    private List<RouteVO> buildRoutes(Long parentId, List<RouteDTO> menuList) {
+    private List<RouteVO> buildRoutes(Long parentId, List<RouteBO> menuList) {
         List<RouteVO> routeList = new ArrayList<>();
 
-        for (RouteDTO menu : menuList) {
+        for (RouteBO menu : menuList) {
             if (menu.getParentId().equals(parentId)) {
                 RouteVO routeVO = toRouteVo(menu);
                 List<RouteVO> children = buildRoutes(menu.getId(), menuList);
@@ -163,27 +163,27 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     /**
      * 根据RouteDTO创建RouteVO
      */
-    private RouteVO toRouteVo(RouteDTO RouteDTO) {
+    private RouteVO toRouteVo(RouteBO routeBO) {
         RouteVO routeVO = new RouteVO();
-        String routeName = StringUtils.capitalize(StrUtil.toCamelCase(RouteDTO.getPath(), '-'));  // 路由 name 需要驼峰，首字母大写
+        String routeName = StringUtils.capitalize(StrUtil.toCamelCase(routeBO.getPath(), '-'));  // 路由 name 需要驼峰，首字母大写
         routeVO.setName(routeName); // 根据name路由跳转 this.$router.push({name:xxx})
-        routeVO.setPath(RouteDTO.getPath()); // 根据path路由跳转 this.$router.push({path:xxx})
-        routeVO.setRedirect(RouteDTO.getRedirect());
-        routeVO.setComponent(RouteDTO.getComponent());
+        routeVO.setPath(routeBO.getPath()); // 根据path路由跳转 this.$router.push({path:xxx})
+        routeVO.setRedirect(routeBO.getRedirect());
+        routeVO.setComponent(routeBO.getComponent());
 
         RouteVO.Meta meta = new RouteVO.Meta();
-        meta.setTitle(RouteDTO.getName());
-        meta.setIcon(RouteDTO.getIcon());
-        meta.setRoles(RouteDTO.getRoles());
-        meta.setHidden(StatusEnum.DISABLE.getValue().equals(RouteDTO.getVisible()));
+        meta.setTitle(routeBO.getName());
+        meta.setIcon(routeBO.getIcon());
+        meta.setRoles(routeBO.getRoles());
+        meta.setHidden(StatusEnum.DISABLE.getValue().equals(routeBO.getVisible()));
         // 【菜单】是否开启页面缓存
-        if (MenuTypeEnum.MENU.equals(RouteDTO.getType())
-                && ObjectUtil.equals(RouteDTO.getKeepAlive(), 1)) {
+        if (MenuTypeEnum.MENU.equals(routeBO.getType())
+                && ObjectUtil.equals(routeBO.getKeepAlive(), 1)) {
             meta.setKeepAlive(true);
         }
         // 【目录】只有一个子路由是否始终显示
-        if (MenuTypeEnum.CATALOG.equals(RouteDTO.getType())
-                && ObjectUtil.equals(RouteDTO.getAlwaysShow(), 1)) {
+        if (MenuTypeEnum.CATALOG.equals(routeBO.getType())
+                && ObjectUtil.equals(routeBO.getAlwaysShow(), 1)) {
             meta.setAlwaysShow(true);
         }
 

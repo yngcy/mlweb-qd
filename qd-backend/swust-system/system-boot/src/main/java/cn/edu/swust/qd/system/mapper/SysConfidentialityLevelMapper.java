@@ -4,7 +4,9 @@ import cn.edu.swust.qd.common.mybatis.annotation.DataPermission;
 import cn.edu.swust.qd.system.model.entity.SysConfidentialityLevel;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface SysConfidentialityLevelMapper extends BaseMapper<SysConfidentia
 
     @DataPermission(clIdColumnName = "sort")
     @Override
-    List<SysConfidentialityLevel> selectList(Wrapper<SysConfidentialityLevel> queryWrapper);
+    List<SysConfidentialityLevel> selectList(@Param(Constants.WRAPPER) Wrapper<SysConfidentialityLevel> queryWrapper);
 }
 
 

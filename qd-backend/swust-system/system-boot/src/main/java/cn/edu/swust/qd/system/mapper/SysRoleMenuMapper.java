@@ -1,7 +1,7 @@
 package cn.edu.swust.qd.system.mapper;
 
 
-import cn.edu.swust.qd.system.model.dto.RolePermsDTO;
+import cn.edu.swust.qd.system.model.bo.RolePermsBO;
 import cn.edu.swust.qd.system.model.entity.SysRoleMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,5 +28,5 @@ public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
     /**
      * 获取权限和拥有权限的角色列表
      */
-    List<RolePermsDTO> getRolePermsList(String roleCode);
+    List<RolePermsBO> getRolePermsList(String roleCode);
 }

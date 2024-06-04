@@ -1,4 +1,4 @@
-package cn.edu.swust.qd.system.model.dto;
+package cn.edu.swust.qd.system.model.bo;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.util.Set;
  * @author <a href="https://github.com/yngcy">YounGCY</a>
  */
 @Data
-public class UserProfileDTO {
+public class UserProfileBO {
 
     /**
      * 用户ID

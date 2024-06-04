@@ -13,4 +13,7 @@ public class CLPageQuery extends BasePageQuery {
 
     @Schema(description = "关键字(密级名称/角色编码/描述)")
     private String keywords;
+
+    @Schema(description = "状态")
+    private Integer status;
 }

@@ -2,7 +2,7 @@ package cn.edu.swust.qd.system.model.form;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
@@ -40,7 +40,7 @@ public class UserForm {
     private String avatar;
 
     @Schema(description = "密级ID")
-    @NotEmpty(message = "用户密级不能为空")
+    @NotNull(message = "用户密级不能为空")
     private Integer slId;
 
     @Schema(description = "用户状态(1:正常;0:禁用)")

@@ -10,9 +10,9 @@ import cn.edu.swust.qd.common.sms.service.SmsService;
 import cn.edu.swust.qd.system.converter.UserConverter;
 import cn.edu.swust.qd.system.dto.UserAuthInfo;
 import cn.edu.swust.qd.system.mapper.SysUserMapper;
-import cn.edu.swust.qd.system.model.dto.UserDTO;
-import cn.edu.swust.qd.system.model.dto.UserFormDTO;
-import cn.edu.swust.qd.system.model.dto.UserProfileDTO;
+import cn.edu.swust.qd.system.model.bo.UserBO;
+import cn.edu.swust.qd.system.model.bo.UserFormBO;
+import cn.edu.swust.qd.system.model.bo.UserProfileBO;
 import cn.edu.swust.qd.system.model.entity.SysUser;
 import cn.edu.swust.qd.system.model.form.UserForm;
 import cn.edu.swust.qd.system.model.form.UserRegisterForm;
@@ -36,7 +36,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -77,38 +76,20 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
     public Page<UserPageVO> getUserPage(UserPageQuery queryParams) {
         int pageNum = queryParams.getPageNum();
         int pageSize = queryParams.getPageSize();
-        Page<UserDTO> page = new Page<>(pageNum, pageSize);
+        Page<UserBO> page = new Page<>(pageNum, pageSize);
 
-        Page<UserDTO> userDTOPage = getUserDTOPage(page, queryParams);
+        Page<UserBO> userPage = this.baseMapper.getUserPage(page, queryParams);
 
-        return userConverter.dto2VO(userDTOPage);
+        return userConverter.bo2VO(userPage);
     }
 
-    private Page<UserDTO> getUserDTOPage(Page<UserDTO> page, UserPageQuery queryParams) {
-        // todo 获取用户DTO分页
-        return null;
-    }
 
     @Override
     public UserForm getUserForm(Long userId) {
-        UserFormDTO userFormDTO = getUserDetail(userId);
-        return userConverter.dto2Form(userFormDTO);
+        UserFormBO userFormBO = this.baseMapper.getUserDetail(userId);
+        return userConverter.bo2Form(userFormBO);
     }
 
-    /**
-     * 根据id获取用户详情
-     *
-     * @param userId
-     * @return
-     */
-    private UserFormDTO getUserDetail(Long userId) {
-        SysUser entity = this.getOne(new LambdaQueryWrapper<SysUser>()
-                .eq(SysUser::getId, userId)
-                .eq(SysUser::getDeleted, 0));
-        UserFormDTO userFormDTO = new UserFormDTO();
-        BeanUtils.copyProperties(entity, userFormDTO);
-        return userFormDTO;
-    }
 
     @Override
     public boolean saveUser(UserForm userForm) {
@@ -123,7 +104,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         String defaultEncryptPassword = passwordEncoder.encode(SystemConstants.DEFAULT_PASSWORD);
         entity.setPassword(defaultEncryptPassword);
 
-        boolean result = this.save(entity);
+        boolean result = this.saveOrUpdate(entity);
         if (result) {
             userRoleService.saveUserRoles(entity.getId(), userForm.getRoleIds());
         }
@@ -245,9 +226,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
     @Override
     public UserProfileVO getUserProfile() {
         Long userId = SecurityUtils.getUserId();
-        UserProfileDTO userProfileDTO = this.baseMapper.getUserProfile(userId);
-        ;
-        return userConverter.dto2VO(userProfileDTO);
+        UserProfileBO userProfileBO = this.baseMapper.getUserProfile(userId);
+
+        return userConverter.userProfileBO2VO(userProfileBO);
     }
 
     @Override

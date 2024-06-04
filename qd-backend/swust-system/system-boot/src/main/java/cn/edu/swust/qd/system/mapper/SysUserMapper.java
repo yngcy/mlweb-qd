@@ -1,9 +1,13 @@
 package cn.edu.swust.qd.system.mapper;
 
 import cn.edu.swust.qd.system.dto.UserAuthInfo;
-import cn.edu.swust.qd.system.model.dto.UserProfileDTO;
+import cn.edu.swust.qd.system.model.bo.UserBO;
+import cn.edu.swust.qd.system.model.bo.UserFormBO;
+import cn.edu.swust.qd.system.model.bo.UserProfileBO;
 import cn.edu.swust.qd.system.model.entity.SysUser;
+import cn.edu.swust.qd.system.model.query.UserPageQuery;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -21,7 +25,7 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @param userId
      * @return
      */
-    UserProfileDTO getUserProfile(Long userId);
+    UserProfileBO getUserProfile(Long userId);
 
     /**
      * 根据用户名获取认证信息
@@ -30,6 +34,23 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @return
      */
     UserAuthInfo getUserAuthInfo(String username);
+
+    /**
+     * 分页获取用户列表
+     *
+     * @param page
+     * @param queryParams
+     * @return
+     */
+    Page<UserBO> getUserPage(Page<UserBO> page, UserPageQuery queryParams);
+
+    /**
+     * 获取用户表单详情
+     *
+     * @param userId
+     * @return
+     */
+    UserFormBO getUserDetail(Long userId);
 }
 
 

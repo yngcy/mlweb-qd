@@ -6,17 +6,14 @@
 
     <!-- 获取角色拥有的菜单ID集合 -->
     <select id="listMenuIdsByRoleId" resultType="java.lang.Long">
-        SELECT
-        rm.menu_id
-        FROM
-        sys_role_menu rm
-        INNER JOIN sys_menu m ON rm.menu_id = m.id
-        WHERE
-        rm.role_id = #{roleId}
+        SELECT rm.menu_id
+        FROM sys_role_menu rm
+                 INNER JOIN sys_menu m ON rm.menu_id = m.id
+        WHERE rm.role_id = #{roleId}
     </select>
 
     <!-- 权限和拥有权限的角色集合的Map -->
-    <resultMap id="PremRolesMap" type="cn.edu.swust.qd.system.model.dto.RolePermsDTO">
+    <resultMap id="PremRolesMap" type="cn.edu.swust.qd.system.model.bo.RolePermsBO">
         <result property="roleCode" column="role_code"/>
         <collection property="perms" ofType="string" javaType="java.util.Set">
             <result column="perm"/>

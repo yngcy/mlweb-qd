@@ -20,5 +20,5 @@ public class UserPageQuery extends BasePageQuery {
     private Integer status;
 
     @Schema(description = "密级ID")
-    private Integer SLId;
+    private Integer slId;
 }

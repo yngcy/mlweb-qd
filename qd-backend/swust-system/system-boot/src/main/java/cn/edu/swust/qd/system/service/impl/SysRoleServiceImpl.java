@@ -85,7 +85,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
         boolean result = this.saveOrUpdate(role);
 
         if (result) {
-            if (oldRole == null && (
+            if (oldRole != null && (
                     !StrUtil.equals(oldRole.getCode(), roleCode) ||
                             !ObjectUtil.equals(oldRole.getStatus(), roleForm.getStatus())
             )) {

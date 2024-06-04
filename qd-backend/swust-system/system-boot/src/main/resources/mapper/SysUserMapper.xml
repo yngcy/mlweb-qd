@@ -29,7 +29,9 @@
         email,deleted,create_time,
         update_time,create_user,update_user
     </sql>
-    <select id="getUserProfile" resultType="cn.edu.swust.qd.system.model.dto.UserProfileDTO">
+
+    <!-- 获取用户个人中心信息 -->
+    <select id="getUserProfile" resultType="cn.edu.swust.qd.system.model.bo.UserProfileBO">
         SELECT u.id,
                u.username,
                u.nickname,
@@ -82,4 +84,76 @@
         WHERE t1.deleted = 0
           AND t1.username = #{username}
     </select>
+
+    <!-- 用户分页列表 -->
+    <select id="getUserPage" resultType="cn.edu.swust.qd.system.model.bo.UserBO">
+        SELECT u.id,
+        u.username,
+        u.nickname,
+        u.gender,
+        u.avatar,
+        u.email,
+        u.mobile,
+        u.status,
+        s.NAME AS sl,
+        GROUP_CONCAT(r.name) AS roleNames,
+        u.create_time
+        FROM sys_user u
+        LEFT JOIN sys_secret_level s ON u.sl_id = s.id
+        LEFT JOIN sys_user_role ur ON u.id = ur.user_id
+        LEFT JOIN sys_role r ON ur.role_id = r.id
+        <where>
+            u.deleted = 0 AND u.username != '${@cn.edu.swust.qd.common.constant.SystemConstants@ROOT_ROLE_CODE}'
+            <if test='queryParams.keywords!=null and queryParams.keywords.trim() neq ""'>
+                AND (
+                u.username LIKE CONCAT('%', #{queryParams.keywords}, '%')
+                OR u.nickname LIKE CONCAT('%', #{queryParams.keywords}, '%')
+                OR u.mobile LIKE CONCAT('%', #{queryParams.keywords}, '%')
+                )
+            </if>
+            <if test='queryParams.status!=null'>
+                AND u.status=#{queryParams.status}
+            </if>
+            <if test='queryParams.slId!=null'>
+                AND u.sl_id=#{queryParams.slId}
+            </if>
+        </where>
+        GROUP BY u.id
+    </select>
+
+    <!-- 用户表单信息映射 -->
+    <resultMap id="UserFormMap" type="cn.edu.swust.qd.system.model.bo.UserFormBO">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="TINYINT"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="slId" column="sl_id" jdbcType="INTEGER"/>
+        <collection
+                property="roleIds"
+                column="id"
+                select="cn.edu.swust.qd.system.mapper.SysUserRoleMapper.listRoleIdsByUserId">
+            <result column="role_id"/>
+        </collection>
+    </resultMap>
+
+    <select id="getUserDetail" resultMap="UserFormMap">
+        SELECT id,
+               username,
+               nickname,
+               gender,
+               avatar,
+               mobile,
+               email,
+               STATUS,
+               sl_id
+        FROM sys_user
+        WHERE id = #{userId}
+          AND deleted = 0
+    </select>
+
+
 </mapper>

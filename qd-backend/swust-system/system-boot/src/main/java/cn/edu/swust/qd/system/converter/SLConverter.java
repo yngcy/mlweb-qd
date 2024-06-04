@@ -1,7 +1,6 @@
 package cn.edu.swust.qd.system.converter;
 
 import cn.edu.swust.qd.common.web.model.Option;
-import cn.edu.swust.qd.system.model.entity.SysRole;
 import cn.edu.swust.qd.system.model.entity.SysSecretLevel;
 import cn.edu.swust.qd.system.model.form.SLForm;
 import cn.edu.swust.qd.system.model.vo.SLPageVO;
@@ -28,8 +27,7 @@ public interface SLConverter {
             @Mapping(target = "value", source = "id"),
             @Mapping(target = "label", source = "name")
     })
-    Option entity2Option(SysRole SysSecretLevel);
-
+    Option entity2Option(SysSecretLevel sl);
 
     List<Option> entities2Options(List<SysSecretLevel> sls);
 }

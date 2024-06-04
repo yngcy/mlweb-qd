@@ -27,9 +27,6 @@ public class UserPageVO {
     @Schema(description = "性别")
     private String genderLabel;
 
-    @Schema(description = "密码")
-    private String password;
-
     @Schema(description = "头像")
     private String avatar;
 
@@ -44,6 +41,9 @@ public class UserPageVO {
 
     @Schema(description = "角色名称，多个以英文逗号分隔")
     private String roleNames;
+
+    @Schema(description = "用户状态(1:启用;0:禁用)")
+    private Integer status;
 
     @Schema(description = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd")

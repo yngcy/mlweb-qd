@@ -13,6 +13,13 @@
         user_id,role_id
     </sql>
 
+    <!-- 根据用户ID获取角色ID集合 -->
+    <select id="listRoleIdsByUserId" resultType="java.lang.Integer">
+        SELECT role_id
+        FROM sys_user_role
+        WHERE user_id = #{userId}
+    </select>
+
     <!-- 获取角色绑定的用户数 -->
     <select id="countUsersForRole" resultType="java.lang.Integer">
         SELECT COUNT(*)

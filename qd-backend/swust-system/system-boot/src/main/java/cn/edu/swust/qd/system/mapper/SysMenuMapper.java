@@ -7,7 +7,7 @@ package cn.edu.swust.qd.system.mapper;
  * @since 2022/1/24
  */
 
-import cn.edu.swust.qd.system.model.dto.RouteDTO;
+import cn.edu.swust.qd.system.model.bo.RouteBO;
 import cn.edu.swust.qd.system.model.entity.SysMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,5 +17,5 @@ import java.util.List;
 @Mapper
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
-    List<RouteDTO> listRoutes();
+    List<RouteBO> listRoutes();
 }

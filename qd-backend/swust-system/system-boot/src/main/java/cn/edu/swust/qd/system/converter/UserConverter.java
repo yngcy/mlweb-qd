@@ -1,9 +1,7 @@
 package cn.edu.swust.qd.system.converter;
 
 
-import cn.edu.swust.qd.system.model.dto.UserDTO;
-import cn.edu.swust.qd.system.model.dto.UserFormDTO;
-import cn.edu.swust.qd.system.model.dto.UserProfileDTO;
+import cn.edu.swust.qd.system.model.bo.UserBO;
 import cn.edu.swust.qd.system.model.entity.SysUser;
 import cn.edu.swust.qd.system.model.form.UserForm;
 import cn.edu.swust.qd.system.model.vo.UserImportVO;
@@ -25,13 +23,13 @@ import org.mapstruct.Mappings;
 public interface UserConverter {
 
     @Mappings({
-            @Mapping(target = "genderLabel", expression = "java(cn.edu.swust.qd.common.base.IBaseEnum.getLabelByValue(dto.getGender(), cn.edu.swust.qd.common.enums.GenderEnum.class))")
+            @Mapping(target = "genderLabel", expression = "java(cn.edu.swust.qd.common.base.IBaseEnum.getLabelByValue(bo.getGender(), cn.edu.swust.qd.common.enums.GenderEnum.class))")
     })
-    UserPageVO dto2VO(UserDTO dto);
+    UserPageVO bo2VO(UserBO bo);
 
-    Page<UserPageVO> dto2VO(Page<UserDTO> dto);
+    Page<UserPageVO> bo2VO(Page<UserBO> bo);
 
-    UserForm dto2Form(UserFormDTO dto);
+    UserForm bo2Form(cn.edu.swust.qd.system.model.bo.UserFormBO bo);
 
     UserForm entity2Form(SysUser entity);
 
@@ -49,8 +47,8 @@ public interface UserConverter {
     SysUser importVO2Entity(UserImportVO vo);
 
     @Mappings({
-            @Mapping(target = "genderLabel", expression = "java(cn.edu.swust.qd.common.base.IBaseEnum.getLabelByValue(dto.getGender(), cn.edu.swust.qd.common.enums.GenderEnum.class))")
+            @Mapping(target = "genderLabel", expression = "java(cn.edu.swust.qd.common.base.IBaseEnum.getLabelByValue(bo.getGender(), cn.edu.swust.qd.common.enums.GenderEnum.class))")
     })
-    UserProfileVO dto2VO(UserProfileDTO dto);
+    UserProfileVO userProfileBO2VO(cn.edu.swust.qd.system.model.bo.UserProfileBO bo);
 
 }

@@ -1,9 +1,15 @@
-package cn.edu.swust.qd.system.model.dto;
+package cn.edu.swust.qd.system.model.bo;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @author <a href="https://github.com/yngcy">YounGCY</a>
  */
-public class UserFormDTO {
+@Data
+public class UserBO {
 
     /**
      * 用户ID
@@ -26,19 +32,14 @@ public class UserFormDTO {
     private Integer gender;
 
     /**
-     * 密码
-     */
-    private String password;
-
-    /**
      * 用户头像
      */
     private String avatar;
 
     /**
-     * 人员密级ID
+     * 人员密级
      */
-    private Integer slId;
+    private String sl;
 
     /**
      * 联系方式
@@ -60,4 +61,9 @@ public class UserFormDTO {
      */
     private String roleNames;
 
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date createTime;
 }

@@ -1,4 +1,4 @@
-package cn.edu.swust.qd.system.model.dto;
+package cn.edu.swust.qd.system.model.bo;
 
 import cn.edu.swust.qd.system.enums.MenuTypeEnum;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author <a href="https://github.com/yngcy">YounGCY</a>
  */
 @Data
-public class RouteDTO {
+public class RouteBO {
 
     /**
      *

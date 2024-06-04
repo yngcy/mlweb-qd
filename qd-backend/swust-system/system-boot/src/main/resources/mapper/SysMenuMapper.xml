@@ -5,7 +5,7 @@
 <mapper namespace="cn.edu.swust.qd.system.mapper.SysMenuMapper">
 
     <!-- 菜单路由映射 -->
-    <resultMap id="RouteMap" type="cn.edu.swust.qd.system.model.dto.RouteDTO">
+    <resultMap id="RouteMap" type="cn.edu.swust.qd.system.model.bo.RouteBO">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
@@ -23,26 +23,23 @@
 
     <!-- 获取路由列表 -->
     <select id="listRoutes" resultMap="RouteMap">
-        SELECT
-        t1.id,
-        t1.name,
-        t1.parent_id,
-        t1.path,
-        t1.component,
-        t1.icon,
-        t1.sort,
-        t1.visible,
-        t1.redirect,
-        t1.type,
-        t3.code,
-        t1.always_show,
-        t1.keep_alive
-        FROM
-        sys_menu t1
-        LEFT JOIN sys_role_menu t2 ON t1.id = t2.menu_id
-        LEFT JOIN sys_role t3 ON t2.role_id = t3.id
-        WHERE
-        t1.type != '${@cn.edu.swust.qd.system.enums.MenuTypeEnum@BUTTON.getValue()}'
+        SELECT t1.id,
+               t1.name,
+               t1.parent_id,
+               t1.path,
+               t1.component,
+               t1.icon,
+               t1.sort,
+               t1.visible,
+               t1.redirect,
+               t1.type,
+               t3.code,
+               t1.always_show,
+               t1.keep_alive
+        FROM sys_menu t1
+                 LEFT JOIN sys_role_menu t2 ON t1.id = t2.menu_id
+                 LEFT JOIN sys_role t3 ON t2.role_id = t3.id
+        WHERE t1.type != '${@cn.edu.swust.qd.system.enums.MenuTypeEnum@BUTTON.getValue()}'
         ORDER BY t1.sort asc
     </select>
 

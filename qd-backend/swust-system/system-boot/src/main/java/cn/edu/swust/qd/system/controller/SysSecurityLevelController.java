@@ -119,7 +119,7 @@ public class SysSecurityLevelController {
         return PageResult.success(result);
     }
 
-    @Operation(summary = "数据密级下拉列表")
+    @Operation(summary = "人员密级下拉列表")
     @GetMapping("/sl/options")
     public Result<List<Option>> listSLOption() {
         List<Option> list = slService.listSLOptions();
